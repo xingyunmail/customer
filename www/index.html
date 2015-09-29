@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="starter">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
+
+    <!--<link rel="stylesheet" href="css/login.css">-->
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- Ngcordova script-->
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/directives.js"></script>
+
+
+    <!--以下是各自添加的JS,请注意标注模块名称-->
+
+    <!-- 欢迎页-->
+    <script src="js/welcome/app.js"></script>
+    <script src="js/welcome/controller.js"></script>
+    <script src="js/welcome/service.js"></script>
+
+    <!--首页模块-->
+    <script src="js/homePage/app.js"></script>
+    <script src="js/homePage/controller.js"></script>
+    <script src="js/homePage/SlideTrans.js"></script>
+
+    <!--立即购买-->
+    <script src="js/buySoon/app.js"></script>
+    <script src="js/buySoon/controller.js"></script>
+    
+    <!--订单管理-->
+    <script src="js/orderManage/orderCommon.js"></script>
+
+    <script src="js/orderManage/orderList/app.js"></script>
+    <script src="js/orderManage/orderList/controller.js"></script>
+    <script src="js/orderManage/changeMilk/service.js"></script>
+
+    <!--更换奶品-->
+    <script src="js/orderManage/changeMilk/app.js"></script>
+    <script src="js/orderManage/changeMilk/controller.js"></script>
+
+    <!--订单管理-更换送奶频率与日期-->
+    <script src="js/orderManage/changeDailyDelivery/app.js"></script>
+    <script src="js/orderManage/changeDailyDelivery/controller.js"></script>
+
+    <!-- 订单详情-->
+    <script src="js/orderManage/orderDetail/app.js"></script>
+    <script src="js/orderManage/orderDetail/controller.js"></script>
+
+
+    <script src="js/init.js"></script>
+
+    <!--以下是各自添加的JS,请注意标注模块名称-->
+
+
+    <!--<script src="js/customer/app.js"></script>-->
+
+    <!-- 购物车模块 -->
+    <script src="js/shoppingcar/app.js"></script>
+    <script src="js/shoppingcar/service.js"></script>
+    <script src="js/shoppingcar/controller.js"></script>
+    <script src="js/shoppingcar/directive.js"></script>
+
+    <!--续订模块-->
+    <script src="js/orderManage/renew/controller.js"></script>
+
+    <!--登陆模块-->
+    <script src="js/login/app.js"></script>
+    <script src="js/login/controller.js"></script>
+    <!--个人资料模块-->
+    <script src="js/userManage/app.js"></script>
+    <script src="js/userManage/controller.js"></script>
+    <!--用户反馈模块-->
+    <script src="js/feedback/app.js"></script>
+    <script src="js/feedback/controller.js"></script>
+    <!--关于模块-->
+    <script src="js/about/app.js"></script>
+    <script src="js/about/controller.js"></script>
+
+
+    <!--上门收款-->
+    <script src="js/doorcollect/app.js"></script>
+    <script src="js/doorcollect/controller.js"></script>
+
+    <script src="js/orderManage/activeMilkApp.js"></script>
+    <script src="js/orderManage/activeMilkController.js"></script>
+
+
+    <!--配送员信息-->
+    <script src="js/customer/app.js"></script>
+    <script src="js/customer/controller.js"></script>
+
+
+    <script src="js/orderManage/changeAddress/changeAddressApp.js"></script>
+    <script src="js/orderManage/changeAddress/changeAddressController.js"></script>
+    <script src="js/orderManage/changeAddress/changeAddressService.js"></script>
+
+
+    <script src="js/personalCenter/controller.js"></script>
+    <script src="js/orderManage/orderList/controller.js"></script>
+
+    <!-- 商品详情-->
+    <script src="js/productDetail/app.js"></script>
+    <script src="js/productDetail/controller.js"></script>
+    <script src="js/productDetail/service.js"></script>
+    <!-- 地址详情-->
+    <script src="js/personalCenter/app.js"></script>
+    <script src="js/personalCenter/controller.js"></script>
+    <script src="js/personalCenter/service.js"></script>
+    <!-- 暂停配送-->
+    <script src="js/orderManage/stopDistribution/app.js"></script>
+    <script src="js/orderManage/stopDistribution/controller.js"></script>
+    <script src="js/orderManage/stopDistribution/service.js"></script>
+
+    <!-- 个人账户-->
+    <script src="js/personalAccount/app.js"></script>
+    <script src="js/personalAccount/controller.js"></script>
+
+    <!-- 个人账户-->
+    <script src="js/payment/app.js"></script>
+    <script src="js/payment/controller.js"></script>
+    <script src="js/payment/pingpp_pay.js"></script>
+
+</head>
+<body>
+
+<ion-pane>
+    <div ui-view></div>
+</ion-pane>
+</body>
+</html>

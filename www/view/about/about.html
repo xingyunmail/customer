@@ -1,0 +1,41 @@
+<ion-header-bar class="bar-kangnuo">
+    <!--<a style="color: orange" class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="customer"></a>-->
+    <!--<a class="">-->
+        <!--<img  src="../../img/login.png" ui-sref="customer"/>-->
+
+    <!--</a>-->
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title">关于康诺</h1>
+    <!--<button class="button button-icon">. . .</button>-->
+</ion-header-bar>
+<ion-content ng-controller="aboutCtrl" style="background-color: rgb(228,230,224)">
+    <div style="margin-left: 15%;margin-top: 26px;margin-right: 15%;text-align: center">
+        <img style="width: 72px;height: 72px" src="img/about/logo.png">
+
+        <p style="color: gray;margin-top: 8px" ng-model="appVersion">版本号: V {{appVersion}}</p>
+        <!--<button class="button icon-left"-->
+                <!--style="color: #ffffff;background: #ff7e00;width: 60%;border-radius: 6px"><img style="text-align: center;width: 13px;height: 27px;vertical-align: middle" src="/img/about/good.png"><a style="margin-left: 15%;color: #ffffff">赞一下</a>-->
+        <!--</button>-->
+    </div>
+
+        <div style="background-color: #ffffff;margin-top: 44px">
+            <div style="margin-left: 8%;margin-right: 8%">
+                <p style="padding-top: 12px;font-size: 18px">
+                    关于康诺
+                </p>
+
+                <p style="margin-top:4%;text-indent: 2em;font-size: 13px">
+                    邯郸市康诺食品有限公司坐落于邯郸县农产品加工园区明珠大街6号，是一家以乳制品生产、销售为主的食品企业，开中原地区送奶到户之先河，公司自1997年3月25日成立以来，以其雄厚的经济实力，严格的管理制度，完善的服务措施，并承蒙社会各界的大力支持与厚爱，现已发展成为华北地区最大的液态奶供应商之一。
+                </p>
+
+                <p style="margin-top: 10px;text-indent: 2em;padding-bottom: 16%;font-size: 13px">
+                    公司现拥有素质高、能力强的员工1000余名，下设邯郸、邢台、安阳、武安、石家庄等五家分公司，并在周边各县设有二十六家办事处，产品广销到冀、鲁、豫三省区，形成了庞大的销售网络。
+                </p>
+            </div>
+        </div>
+
+    <div style="background-color: #ffffff;margin-top: 8%;text-align: center;height: 40px">
+        <p style="padding-top: 8px">客服电话:{{tel}}</a></p>
+
+    </div>
+</ion-content>

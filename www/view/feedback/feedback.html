@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title">意见投诉</h1>
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content ng-controller="feedbackCtrl" style=" background-color: rgb(228,230,224)">
+
+    <div class="list" style="margin-top: 10%;margin-left: 5%; margin-right: 5%;">
+        <label class="item item-input">
+            <textarea style="height: 80px" type="text" ng-model="opinionLabel" placeholder="请说说您的问题和意见"></textarea>
+        </label>
+    </div>
+    <p style="margin-left: 5%">问题截图 (这个可以没有)</p>
+
+    <div  style="margin-left: 5%;margin-right: 5%;margin-top: 8%" >
+
+        <img src="{{photo}}" height="63px" width="63px" style="margin-left: 8px" ng-repeat="photo in photos">
+
+        <button class="button button-outline button-large" style="margin-left: 8px;background: #ffffff" ng-click="showActionsheet()">
+            +
+        </button>
+    </div>
+
+    <button class="button  row-center"
+            style="background:#ff7e00;color: #ffffff;width: 40%;margin-top: 20%;margin-left: 30%;margin-right: 30%;border-radius: 20px;border-color: #ff7e00" ng-click="feedBackCommit()">
+        问题提交
+    </button>
+
+    <div style="margin-top: 40%;text-align: center;height: 40px">
+        <p style="padding-top: 8px">客服电话:{{tel}}</a></p>
+
+    </div>
+
+    <div class="loading-modal opinionbackground" ng-show="opinions">
+        <div class="opinioning">
+
+            <div style="">
+                <div style="text-align: left;padding-left: 8px"><img src="img/feedback/close.png" style="width: 12%;height: 12%" ng-click="opinionhide()"> </div>
+                <img src="img/doorcollect/verifyPerson.png" style="width: 62px;height: 74px">
+                <div>你的宝贵意见我们已经收到<br>
+                    我们会尽快处理并给你回电话
+                </div>
+                <button class="button button-small"
+                        style="margin-top: 10px;margin-bottom: 10px;background:#ff7e00;color: #ffffff;border-radius: 25px;border-color: #ff7e00;width: 40%"
+                        ng-click="goonshopping()">继续逛
+                </button>
+            </div>
+        </div>
+    </div>
+
+</ion-content>
+

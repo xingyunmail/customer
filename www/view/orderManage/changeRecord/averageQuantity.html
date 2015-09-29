@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<div>
+    <div ng-app="starter" ng-controller="getAverageQuantity" >
+        <div class="item item-input">
+            <span >配送日期：</span>
+            <div class=""><input style="width:100px;height:30px;" ng-model="startDate"></div>
+            <div class=""><input style="width:100px;height:30px;" ng-model="endDate"></div>
+            <button class="button-light" style="margin-left: 8px;" ng-click="query()">查询</button>
+        </div>
+        <div class="item item-thumbnail-left">
+            <div class="row" style="border: 1px;">
+                <div class="col col-50">订单类型</div>
+                <div class="col col-50">数量</div>
+            </div>
+            <div class="row" style="border: 1px;" ng-repeat="orderType in orderTypes">
+                <div class="col col-50">{{orderType.orderType}}</div>
+                <div class="col col-50">{{orderType.quantity}}</div>
+            </div>
+        </div>
+    </div>
+</div>

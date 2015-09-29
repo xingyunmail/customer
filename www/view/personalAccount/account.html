@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-stable" style="background: #f5d9a3;">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title" style="text-align: center;">个人账户</h1>
+    <button class="button button-icon icon ion-navicon"></button>
+</ion-header-bar>
+
+<ion-content ng-controller="accountCtrl" style="background: #e9ebe6;">
+
+    <div class="list" >
+
+        <div class="item item-button-right" style="background: #e9ebe6;">
+
+        </div>
+        <label class="item item-button-right">
+
+            <div class="item-content">
+                <div style="background:url(img/personalAccount/wallet.png) no-repeat left center;
+                background-size:24px;
+                padding-left: 35px;
+                height:24px">  账户余额: <span class="assertive">￥ {{money/100 | number:2}}</span></div>
+            </div>
+            <button class="button button-clear" style="background:url(img/personalAccount/milkOrder.png) no-repeat right center;
+                background-size:104px;width: 30%;text-align: center" ui-sref="homePage"><span style="color: #ffffff;margin-left: 22%;">去订奶</span></button>
+        </label>
+
+        <div class="item" style="background: #e9ebe6;">
+            <h2>账户明细</h2>
+        </div>
+
+        <a class="item item-avatar item-button-right" href="#" style="background: #e9ebe6;" ng-repeat="account in items">
+            <img src="img/sn2.jpg">
+            <h2>{{account.payType | paytypeFilter }}</h2>
+            <p>{{account.createTime | date : 'yyyy-MM-dd'}}</p>
+            <button class="button button-clear">
+                <span class="dark">+{{account.price/100 | number:2}}</span>
+            </button>
+        </a>
+
+        <ion-infinite-scroll on-infinite="loadMore()" ng-if="!noMoreData"></ion-infinite-scroll>
+
+    </div>
+
+</ion-content>

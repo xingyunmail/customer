@@ -1,0 +1,15 @@
+<ion-modal-view>
+    <div class="modal">
+        <ion-header-bar>
+            <h1 class="title">城市列表</h1>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list">
+                <a class="item" ng-click="openModal(city,2)" ng-show="citychecked" ng-repeat="city in cityModal">{{city.cityName}}</a>
+                <a class="item" ng-click="closeModal(town)" ng-if="cityModal.length>1" ng-show="townchecked"
+                   ng-repeat=" town in townModal track by $index">{{town}}</a>
+            </div>
+
+        </ion-content>
+    </div>
+</ion-modal-view>

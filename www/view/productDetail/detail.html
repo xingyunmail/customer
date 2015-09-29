@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <div class="h1  title" style="text-align: center; color: #000000; margin-top: 5px">商品详情</div>
+</ion-header-bar>
+
+<ion-content has-bouncing="true">
+
+    <!--<img src="{{productInfo.images[0]}}" style="width: 100%;height: 160px">-->
+    <div class="container" id="idContainer" style="margin-top: 10px;height: 115px">
+        <table id="idSlider" border="0" cellpadding="0" cellspacing="0">
+            <td >
+                <img ng-src="{{productInfo.images[0]}}" width="100%" height="115px">
+            </td>
+        </table>
+    </div>
+
+
+    <div class="item" style="height: 80px;background: #f0f0f0;margin-top: 50px;">
+        <div class="row" style="margin-top: -8px">
+            <strong class="col col-80" style="margin-left: -8px">{{productInfo.name}}</strong>
+
+            <div class="col" style="color: red">￥{{productInfo.price/100 | number:2}}</div>
+        </div>
+    </div>
+    <div class="item item-text-wrap">
+        <p>产品介绍：</p>
+
+        <p ng-bind-html="productInfo.description"></p>
+    </div>
+</ion-content>
+
+<ion-footer-bar>
+
+    <div class="row bar bar-light bar-footer" style="background: #dddcdc;height: 100%;">
+        <div class="productDetailShopping">
+
+        <a href="#" ng-click="productInfoAddShoppintcar()">加入购物车</a><img src="img/productDetail/shopping.png"/>
+        </div>
+        <div class="productDetailBuysoon"><img src="img/productDetail/buysoon.png" width="25px" height="25px"/><a href="#"
+                                                                                             ng-click="productInfoBuysoon()">立即购买</a>
+        </div>
+    </div>
+
+</ion-footer-bar>

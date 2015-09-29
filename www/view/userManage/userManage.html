@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-kangnuo" >
+    <!--<a class="button icon-left ion-chevron-left button-clear button-dark" ui-sref="customer"></a>-->
+    <button class="button button-icon back-button-icon" back-button ui-sref="customer"></button>
+
+    <h1 class="title">个人资料</h1>
+    <menu-button></menu-button>
+</ion-header-bar>
+<ion-content ng-controller="userManageCtrl" style=" background-color: rgb(228,230,224)">
+
+    <div class="button-bar" >
+        <a class="button" style="border-color:rgb(253,104,9);background-color: #f0f0f0" ui-sref="address">收货地址管理</a>
+        <a class="button" style="background-color: #ff7e00;color: #ffffff;border-color:#ff7e00">账号管理</a>
+
+    </div>
+    <div ng-hide="registerhide">
+
+
+
+
+
+        <!--<div class="row" style="margin-top: 15%;height: 45px">-->
+            <!--<label class="col col-67 item item-input" style="height: 45px;margin-top: -5px;margin-left: 1%">-->
+                <!--<input type="text" placeholder="请输入登录手机号" ng-model="phoneValue">-->
+            <!--</label>-->
+
+            <!--<input type="hidden" ng-model="getCode">-->
+            <!--<button class="col button button-small" ng-model="verifyButton" ng-disabled="isDisabled"-->
+                    <!--style="height: 45px;margin-top: -5px;background-color: #ff7e00;color: #ffffff;margin-right: 2%" ng-click="getVerifyCode()">-->
+                <!--{{buttonValue || "获取验证码"}}-->
+            <!--</button>-->
+        <!--</div>-->
+
+
+            <div class="item item-input" style="height: 45px;margin-left: 3%;margin-right: 3%;margin-top: 15%">
+                <span class="input-label" style="width: 15%;">手机号</span>
+                <input type="text" placeholder="请输入登录手机号" ng-model="phoneValue">|
+                <input type="hidden" ng-model="getCode">
+                <button class="button button-clear button-small" ng-model="verifyButton" ng-disabled="isDisabled"
+                        style="height: 45px;width: 56%;margin-right: 6%" ng-click="getVerifyCode()">
+                    <span class="dark" style="color: #000000">{{buttonValue || "获取验证码"}}</span>
+                </button>
+
+
+
+        </div>
+
+        <div style="margin-top: 15px;margin-left: 3%;margin-right: 3%">
+            <label class="item item-input" style="height: 45px;margin-top: 15px">
+                <input type="text" placeholder="输入验证码" ng-model="localCode">
+            </label>
+
+            <label class="item item-input" style="height: 45px;margin-top: 15px">
+                <input type="password" placeholder="输入登录密码" ng-model="password">
+            </label>
+
+            <label class="item item-input" style="height: 45px;margin-top: 15px">
+                <input type="password" placeholder="再次输入登录密码" ng-model="repassword">
+            </label>
+        </div>
+        <div style="height: 30px;margin-left: 3%"><h6 class="text-left assertive"
+                                                      style="height: 20px">{{msg}}</h6></div>
+
+        <div style="margin-top: 10%;margin-left: 16%">
+            <button class="button  row-center" style="color: #ffffff; width: 80%;background-color: #ff7e00;border-radius: 25px" ng-click="registerVerify()">
+                注册
+            </button>
+        </div>
+        </div>
+
+        <!--修改密码-->
+
+        <div ng-hide="posswordhide">
+            <div style="margin-top: 15%;margin-left: 20%">
+                <p ng-model="localphone"> 登陆手机号 : {{localphone}} </p>
+            </div>
+
+            <div style="margin-top: 45px;margin-left: 10%;margin-right: 10%">
+                <label class="item item-input" style="height: 40px">
+                    <input type="password" placeholder="输入旧密码" ng-model="oldpassword">
+                </label>
+                <label class="item item-input" style="height: 40px;margin-top: 15px">
+                    <input type="password" placeholder="输入新密码" ng-model="newpassword">
+                </label>
+                <label class="item item-input" style="height: 40px;margin-top: 15px">
+                    <input type="password" placeholder="请再次输入新密码" ng-model="renewpassword">
+                </label>
+            </div>
+            <div style="height: 30px;margin-left: 15%;margin-top:5%"><h6 class="text-left assertive"  style="height: 20px">{{newmsg}}</h6></div>
+
+            <div style="margin-top: 5%;margin-left: 18%">
+                <button class="button  row-center" style="color: #ffffff; width: 80%;background-color: #ff7e00;border-radius: 25px" ng-click="modpassword()">
+                    修改密码
+                </button>
+            </div>
+        </div>
+
+
+</ion-content>
+<div class="loading-modal opinionbackground" ng-controller="userManageCtrl"  ng-show="opinions">
+    <div class="opinioning">
+
+        <div style="">
+            <div style="text-align: left;padding-left: 8px"><img src="img/feedback/close.png" style="width: 20px;height: 20px" ng-click="opinionhide()"> </div>
+            <img src="img/doorcollect/verifyPerson.png" style="width: 62px;height: 74px">
+            <div>修改密码成功
+            </div>
+            <button class="button button-small"
+                    style="margin-top: 10px;background:#ff7e00;color: #ffffff;border-radius: 25px;border-color: #ff7e00;width: 40%"
+                    ng-click="goonshopping()">继续逛
+            </button>
+        </div>
+    </div>
+</div>
+<div class="loading-modal opinionbackground" ng-controller="userManageCtrl"  ng-show="registerShow">
+    <div class="opinioning">
+
+        <div style="">
+            <div style="text-align: left;padding-left: 8px"><img src="img/feedback/close.png" style="width: 20px;height: 20px" ng-click="registerHideClick()"> </div>
+            <img src="img/doorcollect/verifyPerson.png" style="width: 62px;height: 74px">
+            <div>欢迎你成为小诺家族的一员!
+            </div>
+            <button class="button button-small"
+                    style="margin-top: 10px;background:#ff7e00;color: #ffffff;border-radius: 25px;border-color: #ff7e00;width: 40%"
+                    ng-click="goshopping()">继续逛
+            </button>
+        </div>
+    </div>
+</div>
+

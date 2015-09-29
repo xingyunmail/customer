@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title title-center">更换地址</h1>
+    <menu-button></menu-button>
+</ion-header-bar>
+<ion-content style="background: whitesmoke">
+    <!--<div class="item item-input" style="margin-bottom:5px;">
+        当前配送地址：
+    </div>
+    <div>
+        <div>
+            <img src="../img/changeAddress/addressBorder.png" style="width:100%;height:162px;" />
+            <label class="item item-radio" style="margin-left:4px;margin-right:4px;margin-top:-163px;" >
+                <div class="item-content">
+                    <span class="input-label" ng-model="custName" style="">{{defaultAddress.name}}</span>
+                    <span ng-model="address" class="item-text-wrap" style="color: #767676" >{{defaultAddress.province}}&nbsp;&nbsp;{{defaultAddress.city}}&nbsp;&nbsp;{{defaultAddress.district}}<br>{{defaultAddress.address}}</span>  &lt;!&ndash;内容过长 隐藏部分： style="word-wrap:break-word;word-break:normal;"&ndash;&gt;
+                    <span class="input-label" ng-model="phone" style="color: #767676">{{defaultAddress.phone}}</span>
+                </div>
+            </label>
+        </div>
+        <div class="item item-input" style="margin-top:10px;border:0px;margin-bottom:5px;">
+           选择已存在的地址：
+        </div>
+        <label class="item item-radio"  ng-repeat="addr in address" >
+            <input type="radio"  ng-model="$parent.selected" value="{{addr}}" ng-click="getSelectedValue(addr)">
+            <div class="item-content">
+                <span class="input-label" ng-model="custName" style="">{{addr.name}}</span>
+                <span ng-model="address" class="item-text-wrap" style="color: #767676"  >{{addr.province}}&nbsp;&nbsp;{{addr.city}}&nbsp;&nbsp;{{addr.district}}<br>{{addr.address}}</span>  &lt;!&ndash;内容过长 隐藏部分： style="word-wrap:break-word;word-break:normal;"&ndash;&gt;
+                <span class="input-label" ng-model="phone" style="color: #767676">{{addr.phone}}</span>
+            </div>
+            <i class="radio-icon ion-checkmark-circled"></i>
+        </label>
+        <label class="item item-input" style="margin-top:10px;">
+            <span class="input-label" >选择生效日期：</span>
+            <span class="input-label"><input type="date" id="validDate" style="padding-top:0px;" /></span>
+        </label>
+    </div>
+-->
+
+    <!--<div class="list " style="margin-top: -10px">-->
+        <div class="item item-input" style="margin-bottom:5px;margin:6px;border-color: #ffffff;">
+            当前配送地址：
+        </div>
+        <img src="../img/changeAddress/addressBorder.png" style="margin-left:6px;width:97.1%;height:162px;" />
+        <div class="row item item-thumbnail-left item-body list-inset" style="width: 95%;height:150px;border-color: #ffffff;margin-top:-161px;">
+            <label>
+                <span class="input-label" ng-model="custName" style="">{{defaultAddress.name}}</span>
+                <span ng-model="address" class="item-text-wrap" style="color: #767676" >{{defaultAddress.province}}&nbsp;&nbsp;{{defaultAddress.city}}&nbsp;&nbsp;{{defaultAddress.district}}<br>{{defaultAddress.address}}</span>  <!--内容过长 隐藏部分： style="word-wrap:break-word;word-break:normal;"-->
+                <span class="input-label" ng-model="phone" style="color: #767676">{{defaultAddress.phone}}</span>
+            </label>
+        </div>
+        <div class="item item-input" style="margin-left:9px;margin-right:9px;border-color: #ffffff;">
+            选择已存在的地址：
+        </div>
+        <div class="row item item-thumbnail-left item-body list-inset"
+             style="width: 95%;height:145px;border-color: #ffffff" ng-repeat="addr in address">
+            <label class="item item-radio" style="width:100%;height:100%;border-color: #ffffff">
+                <input type="radio"  ng-model="$parent.selected" value="{{addr}}" ng-click="getSelectedValue(addr)">
+                <span class="input-label" ng-model="custName" style="">{{addr.name}}</span>
+                <span ng-model="address" class="item-text-wrap" style="color: #767676"  >{{addr.province}}&nbsp;&nbsp;{{addr.city}}&nbsp;&nbsp;{{addr.district}}<br>{{addr.address}}</span>  <!--内容过长 隐藏部分： style="word-wrap:break-word;word-break:normal;"-->
+                <span class="input-label" ng-model="phone" style="color: #767676">{{addr.phone}}</span>
+                <i class="radio-icon ion-checkmark-circled"></i>
+            </label>
+        </div>
+        <label class="item item-input" style="margin-left:9px;margin-right:9px;border-color: #ffffff;">
+            <span class="input-label" >选择生效日期：</span>
+            <span class="input-label"><input type="date" id="validDate" style="padding-top:0px;" /></span>
+        </label>
+    <!--</div>-->
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="bar bar-footer bar-stable">
+        <button class="button button-stable button-kangnuo" style="" ui-sref="addAddress({flag:1})"><label style="color: white">新增地址</label></button>
+        <button class="button button-stable button-kangnuo" style="" ng-click="changeAddress()"><label style="color: white">确认更换</label></button>
+    </div>
+</ion-footer-bar>

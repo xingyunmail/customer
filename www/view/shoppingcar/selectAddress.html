@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar bar-header bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <!-- ui-sref="orderList" -->
+    <h1 class="title">收货地址</h1>
+</ion-header-bar>
+<ion-content ng-controller="selectAddrCtrl">
+    <label class="item item-radio" ng-repeat="addr in address">
+        <input type="radio" ng-model="$parent.selected" value="{{addr}}"  ng-click="selectedAddr(addr)">
+
+        <div class="item-content">
+            <span class="input-label" ng-model="custName">{{addr.name}}</span>
+            <span ng-model="address" class="item-text-wrap">{{addr.province}}{{addr.city}}{{addr.district}}{{addr.address}}</span>
+            <span class="input-label" ng-model="phone">{{addr.phone}}</span>
+        </div>
+        <i class="radio-icon ion-checkmark-circled"></i>
+    </label>
+
+    <label class="item" ng-click="addNewAddress()">
+        <i class="ion-plus-circled"></i><span>新增地址</span>
+    </label>
+    <label class="item">
+       <span style="color: red">* 仅支持配送到当前所选城市：[{{appCity}}]</span>
+    </label>
+    </div>
+</ion-content>
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <div class="h1  title" style="text-align: center; color: #000000; margin-top: 5px">个人资料</div>
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content class="has-header">
+    <div class="button-bar">
+        <button class="col-50 button-self button-full button-yellow-self " ui-sref="address">
+            收货地址管理
+        </button>
+        <button class="col-50 button-self2 button-full" ui-sref="userManage">
+            账号管理
+        </button>
+    </div>
+
+    <div class="list">
+        <ion-list>
+            <div ng-repeat="address in address">
+                <ion-item>
+                    <label>{{address.name}}</label><br>
+                    <label>{{address.city}} {{address.district}} {{address.address}}</label><br>
+                    <label>{{isshow}}{{address.phone}}</label><br>
+                    <span class="badge default-self2" ng-hide="address.isDefault"
+                          ng-click="setIsDefault(address)">默认地址</span>
+                    <span class="badge default-self" ng-show="address.isDefault" style="margin-right:0px;">默认地址</span>
+
+                    <ion-option-button class="button-positive" ng-click="ediAddress('{{address.contactId}}')">编辑
+                    </ion-option-button>
+                    <ion-option-button class="button-assertive" ng-click="deleteAddress('{{address}}')">删除
+                    </ion-option-button>
+                </ion-item>
+            </div>
+        </ion-list>
+
+    </div>
+    <div class="addaddress">
+        <img src="img/address/add.png" ng-click="toaddress()"/>
+        <h4 ng-click="toaddress()">新增地址</h4>
+
+    </div>
+
+</ion-content>

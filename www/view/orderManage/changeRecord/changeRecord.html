@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<div ng-app="starter" ng-controller="changeRecord" >
+    <!--<label class="item item-input">-->
+        <!--<span class="input-label">变动类型：{{changeList[0].changeType}}</span>-->
+        <!--<span class="input-label">变动时间</span>-->
+    <!--</label>-->
+    <div id="changeList_exchangeProd" ng-show="exchangeProd">
+        <label class="item item-input" ng-repeat="change in oldProdList">
+            <span class="input-label">原商品：{{change.oldProdName}}</span>
+            <input type="text" ng-model="oldProdName"/>
+            <span class="input-label">余量:{{change.oldNumber}}</span>
+            <input type="text" ng-model="oldNumber"/>
+        </label>
+        <label class="item item-input" ng-repeat="change in newProdList">
+            <span class="input-label">新商品：{{change.newProdName}}</span>
+            <input type="text" ng-model="newProdName"/>
+            <span class="input-label">数量:{{change.newNumber}}</span>
+            <input type="text" ng-model="newNumber"/>
+        </label>
+        <label class="item item-input" style="padding-left:5em;" ng-repeat="change in newProdList">
+            <span class="input-label">周期:{{change.newPeriod}}</span>
+            <input type="text" ng-model="newPeriod"/>
+            <span class="input-label">日配:{{change.newDayDeliver}}</span>
+            <input type="text" ng-model="newDayDeliver"/>
+            <span class="input-label">开始日期:{{change.newStartDate}}</span>
+            <input type="text" ng-model="newStartDate"/>
+        </label>
+    </div>
+
+    <div id="changeList_address" ng-show="address">
+        <label class="item item-input">
+            <span class="input-label">原信息：</span>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">地址：{{changeList[0].oldAddress}}</span>
+            <input type="text" ng-model="oldAddress"/>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">联系人：{{changeList[0].oldCust}}</span>
+            <input type="text" ng-model="oldCust"/>
+            <span class="input-label">手机号：{{changeList[0].oldPhone}}</span>
+            <input type="text" ng-model="oldPhone"/>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">新信息：</span>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">地址：{{changeList[0].newAddress}}</span>
+            <input type="text" ng-model="newAddress"/>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">联系人：{{changeList[0].newCust}}</span>
+            <input type="text" ng-model="newCust"/>
+            <span class="input-label">手机号：{{changeList[0].newPhone}}</span>
+            <input type="text" ng-model="newPhone"/>
+        </label>
+    </div>
+    <div id="changeList_pause" ng-show="pause">
+        <label class="item item-input" >
+            <span class="input-label">停止配送日期：{{changeList[0].stopDate}}</span>
+            <input type="text" ng-model="stopDate"/>
+        </label>
+        <label class="item item-input" >
+            <span class="input-label">下次配送开始日期：{{changeList[0].nextStartDate}}</span>
+            <input type="text" ng-model="nextStartDate"/>
+        </label>
+    </div>
+    <div id="changeList_back" ng-show="back" ng-init="count=0" >
+        <label class="item item-input">
+            <span class="input-label">变动类型：{{changeList[0].changType}}</span>
+            <span class="input-label" style="padding-left:2em;">变动时间：{{changeList[0].changeDate}}</span>
+        </label>
+        <label ng-repeat="change in changeList" class="item item-input">
+            <label>
+                <span class="input-label" ng-model="prod" >品种：{{change.prod}}</span>
+                <span class="input-label" ng-model="number" >数量：{{change.number}}</span>
+                <span class="input-label" ng-model="price" >单价：{{change.price}}</span>
+            </label>
+        </label>
+
+        <label class="item item-input" >
+            <span class="input-label" ng-model="backCount">退款合计：{{backCount}}</span>
+        </label>
+    </div>
+    <div id="changeList_deliver" ng-show="deliver">
+        <label class="item item-input">
+            <span class="input-label">变动类型：{{changeList[0].changType}}</span>
+            <span class="input-label" style="padding-left:2em;">变动时间：{{changeList[0].changeDate}}</span>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">原日配与频率：</span>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">品种：{{}}</span>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">日配：</span>
+            <span class="input-label">频率：</span>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">变更后日配与频率：</span>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">品种：</span>
+        </label>
+        <label class="item item-input" style="padding-left:5em;">
+            <span class="input-label">日配：</span>
+            <span class="input-label">频率：</span>
+        </label>
+
+    </div>
+</div>

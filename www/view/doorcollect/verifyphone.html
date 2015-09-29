@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-stable" style="background: #f5d9a3;">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title" style="text-align: center;">确认手机号</h1>
+</ion-header-bar>
+
+<ion-content ng-controller="doorcollectCtrl" style="background: #e9ebe6;">
+
+    <div class="item-thumbnail-left">
+        <img src="img/doorcollect/verifyPerson.png">
+        <h5>为了确保小诺能够联系到您，需要验证收货手机号，请填写您收到的验证码。</h5>
+    </div>
+
+    <div class="list" style="background: #e9ebe6;">
+        <div class="item-input-inset">
+
+            手机号 : &nbsp;<input type="text" style="width:50%;background-color: #e9ebe6;color: #111111;" ng-model="phone" readonly>
+
+            <button class="button button-small button-light button-clear btnFillet" style="background-color: #ff7e00;width: 15%;margin-right: 15%;" ng-click="modifyPhone()">
+                <span class="light">修 改</span>
+            </button>
+        </div>
+
+        <input type="hidden" ng-model="localCode">
+
+        <div class="item item-input" style="height: 50px;">
+            <span class="input-label" style="width: 20%;">验证码</span>
+            <input type="text" ng-model="verifyCode" placeholder="短信验证码">|
+            <button class="button button-clear" style="width: 100%;margin-right: 8%;" ng-model="verifyButton" ng-disabled="isDisabled" ng-click="getVerifyCode()">
+                <span class="dark">{{buttonValue || "点此获取验证码"}}</span>
+            </button>
+        </div>
+
+        <div class="padding-16">
+            <button class="button button-block button-light button-clear btnFillet" style="background: #ff7e00;width: 70%;margin-left: 15%;" ng-click="judgeVerifyCode()"><span class="light">下一步</span></button>
+        </div>
+
+    </div>
+
+</ion-content>
+

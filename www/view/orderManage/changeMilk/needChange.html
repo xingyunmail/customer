@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <div class="h1  title text-center" style="text-align: center; color: #000000">更换品种</div>
+
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content style="background: #e9ebe6">
+
+    <div class="item" style="line-height: 15px;background: #eaebe6;font-size: 12px">
+        请选择需要更换的奶品：
+    </div>
+
+    <div class="list">
+        <div class="item" ng-repeat="prod in milks" style="margin-bottom:5%;font-size: 12px">
+            <div type="checkbox" class="row">
+                <input type="checkbox" name="prodGroup_1" value="{{prod.prodId}}"
+                       ng-click="addNeedChangeMilks(prod)"
+                       style="position:absolute; top:40%;left:20px;transform:translate( -50%, -50%)">
+
+                <img ng-src="{{prod.image}}" style="margin-left: 30px" width="70px" height="70px">
+
+                <div>
+                    <div class="row item-body">{{prod.prodName}}</div>
+                    <div class="row" style="margin-top: 3px;color: red">￥{{prod.price/100 | number : 2}}</div>
+                    <div class="row" style="margin-top: 3px">
+                        余量：{{prod.stopDate ? prod.deliverDays*prod.quantity: getRemainMilkCount(prod.info)}}{{prod.prodUnit}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="item item-body" style="background: #eaebe6;font-size: 12px">
+        <div style="color: red">换奶说明：</div>
+        <div style="color: #adaea9;text-indent:2em">
+            康诺草莓凝固型酸牛奶，康诺草莓凝固型酸牛奶。
+            康诺草莓凝固型酸牛奶，康诺草莓凝固型酸牛奶。
+            康诺草莓凝固型酸牛奶，康诺草莓凝固型酸牛奶。
+            康诺草莓凝固型酸牛奶，康诺草莓凝固型酸牛奶。
+            康诺草莓凝固型酸牛奶，康诺草莓凝固型酸牛奶。
+        </div>
+    </div>
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="row bar bar-footer" style="background: #dddbdc;font-size: 12px">
+        <div class="col"></div>
+        <button class="col button changeMilkMakeSureBtn" ng-click="makeSureClick()">
+            确定
+        </button>
+        <div class="col"></div>
+    </div>
+</ion-footer-bar>
+
+

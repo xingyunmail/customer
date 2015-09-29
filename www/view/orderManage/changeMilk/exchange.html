@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <div class="h1  title text-center" style="text-align: center; color: #000000">更换品种</div>
+
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content>
+    <!--<div class="item" style="background: #ffffff; line-height: 35px;text-align: center">-->
+    <!--未配送的奶品折算金额:<label style="color: red;font-size: 20px">￥{{totalPrice | number : 2}}</label>-->
+    <!--</div>-->
+
+    <div class="item" style="line-height: 15px;background: #e9ebe6;font-size: 12px">
+        更换新奶品
+    </div>
+    <!--<ul class="list">-->
+
+    <!--<li class="item item-checkbox" ng-repeat="prod in products" style="height: 50px">-->
+    <!--<label class="checkbox row">-->
+    <!--<input type="checkbox" name="prodGroup" value="{{prod.prodId}}" ng-click="add2Prods(prod.prodId)">-->
+
+    <!--<div class="col">{{prod.prodName}}</div>-->
+    <!--<div class="col col-33">{{prod.prodPrice}}元/袋</div>-->
+    <!--</label>-->
+    <!--</li>-->
+    <!--</ul>-->
+
+    <!--<div class="item list item-stable" ng-repeat="prod in products">-->
+    <!--<div type="radio " class="row">-->
+    <!--<input class="col col-10" type="checkbox" name="prodGroup" value="{{prod.prodId}}"-->
+    <!--ng-click="add2Prods(prod.prodId)"-->
+    <!--style="position:absolute; top:50%;left:5%;transform:translate( -50%, -50%)">-->
+
+    <!--<img class="col col-34 col-offset-10" src="{{'img/sn3.jpg'}}" style="height: 100px; width: 100px">-->
+
+    <!--<label class="col col-offset-10">-->
+    <!--<div class="row">{{prod.prodName}}</div>-->
+    <!--<div class="row" style="margin-top: 20px">{{prod.prodPrice}}元/袋</div>-->
+    <!--</label>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="list">
+        <div class="row" ng-repeat="product in products">
+            <div class="item item-thumbnail-top col-33" type="checkbox" ng-repeat="prod in product.prods" style="font-size: 12px">
+
+                <img ng-src="{{prod.icon}}" style="height: 70px; width: 70px;margin-left: 6%">
+
+                <div style="white-space:normal;width: 100%">{{prod.name}}</div>
+
+                <div style="margin-top: 10px;margin-left: -10px;color: red">
+                    ￥{{prod.price/100 | number : 2}}
+                </div>
+
+                <input type="checkbox" value="{{prod.prodId}}"
+                       ng-click="addExchangeProds(prod)"
+                       style="position:absolute; top:80%;left:75%;zoom:1 ">
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="row bar bar-footer" style="background: #dddbdc;font-size: 12px">
+        <div class="col"></div>
+        <button class="col button changeMilkMakeSureBtn" ng-click="nextStep()">
+            确定
+        </button>
+        <div class="col"></div>
+    </div>
+</ion-footer-bar>
+
+

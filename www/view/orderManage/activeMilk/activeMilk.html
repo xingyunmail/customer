@@ -1,0 +1,100 @@
+<!--<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <div class="h1  title" style="text-align: center; color: #000000; margin-top: 5px">开始配送</div>
+    <menu-button></menu-button>
+
+</ion-header-bar>
+
+<ion-content>
+<ion-refresher
+        pulling-text="下拉刷新..."
+        on-refresh="doRefresh()">
+</ion-refresher>
+    <div class="list " >
+        <div class="item card"  ng-repeat="product in productList" style="margin-top: 5%">
+            <label class="item-input col-90">
+                <span>{{product.prodName}}</span>
+            </label></br>
+            <label class=" item-input col-90">
+                <span class="col-33">下次配送日期:</span>
+             <span class="col-offset-10"><input id="model_{{$index}}" type="date"></span>
+
+            </label>
+        </div>
+    </div>
+    <label style="text-align:center"><span style="color: red;text-align:center" ng-model="des">{{des}}</span></label>
+</ion-content>
+&lt;!&ndash;<ion-footer-bar>
+    <div class="bar bar-footer no-padding">
+        <button class="button button-positive button-block " style="margin: 0;padding: 0;" ng-disabled = "falg" ng-click="startDelivery()">确认配送</button>
+    </div>
+
+</ion-footer-bar>
+<ion-footer-bar>
+    <div class="row bar bar-footer" style="background: #dddbdc">
+        <button class="col button changeMilkMakeSureBtn"  ng-disabled = "falg" ng-click="startDelivery()">确认配送</button>
+        <button class="col button changeMilkMakeSureBtn" style="margin: 0;padding: 0;" ng-disabled = "falg" ng-click="startDelivery()">确认配送</button>
+        <button class="col button changeMilkMakeSureBtn" ng-click="nextStep()">确定</button>
+    </div>
+</ion-footer-bar>&ndash;&gt;-->
+
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <div class="h1  title" style="text-align: center; color: #000000; margin-top: 5px">开始配送</div>
+    <menu-button></menu-button>
+
+</ion-header-bar>
+
+<ion-content style="background: #e9ebe6">
+
+    <div class="item" style="line-height: 15px;background: #eaebe6">
+        请选择需要开始配送的奶品：
+    </div>
+
+    <div class="list">
+        <div class="item" ng-repeat="product in productList" style="margin-bottom:5%">
+            <div type="checkbox" class="row">
+                <input type="checkbox" name="prodGroup_1" value="{{product.prodId}}"
+                       ng-click="addActiveMilks(product)"
+                       style="position:absolute; top:40%;left:20px;transform:translate( -50%, -50%)">
+
+                <img src="{{product.image}}" style="margin-left: 30px">
+
+                <div>
+                    <div class="row item-body">{{product.prodName}}</div>
+                    <div class="row" style="margin-top: 10px">
+                        <span class="col-33">下次配送日期:</span>
+                        <span class="col-offset-10"><input id="model_{{$index}}" type="date"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <label style="text-align:center"><span style="color: red;text-align:center" ng-model="des">{{des}}</span></label>
+
+    <div class="item item-body" style="background: #eaebe6">
+        <div style="color: red">开始配送说明：</div>
+        <div style="color: #adaea9;text-indent:2em;font-size: 12px">
+           1.下午六点以前选择日期最早第二天开始配送,六点以后选择日期最早后天开始配送!!!
+            </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            2.提前配送的奶品配送日期不能大于已有的配送日期!!!
+            </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           3.提前配送的奶品配送日期不能为空!!!
+        </div>
+    </div>
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="row bar bar-footer" style="background: #dddbdc">
+        <div class="col"></div>
+        <button class="col button changeMilkMakeSureBtn"  ng-disabled = "falg"  ng-click="startDelivery()">确定</button>
+        <div class="col"></div>
+    </div>
+</ion-footer-bar>
+
+

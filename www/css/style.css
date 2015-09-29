@@ -1,0 +1,766 @@
+/* Empty. Add your own CSS if you like */
+
+@media screen and (max-width: 320px) {
+    /*兼容iphone4(s)/5(s)*/
+    /*.ionContent {*/
+    /*zoom: 0.6;*/
+    /*margin-top: 25px;*/
+    /*}*/
+    #adImage {
+        height: 115px
+    }
+
+    #idContainer {
+        height: 115px
+    }
+
+    .homeCell {
+        height: 106px
+    }
+
+    #milkPhoto {
+        height: 115px;
+    }
+}
+
+@media screen and (max-width: 375px) and (min-width: 321px) {
+    /*兼容iphone6*/
+    .homeCell {
+        height: 125px;
+        line-height: 35px
+    }
+
+    #milkPhoto {
+        height: 155px;
+    }
+
+    #navList {
+        margin-left: 25%;
+    }
+}
+
+@media (device-height: 736px) and (-webkit-min-device-pixel-ratio: 2) {
+    /*兼容iphone6 plus*/
+
+}
+
+/*@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2){*//* 兼容iphone4/4s/5 */
+/*.ionContent{*/
+/*zoom: 0.6;*/
+/*margin-top: 25px;*/
+/*}*/
+/*}*/
+
+/*@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){*/
+/*兼容iphone5*/
+/*.class{}*/
+/*}*/
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+.foot-button-padding {
+    padding: 2%;
+}
+
+.button-full.no-margin {
+    margin: 0;
+}
+
+.maroon::selection {
+    background: maroon;
+    color: #fff;
+}
+
+.maroon::-moz-selection {
+    background: maroon;
+    color: #fff;
+}
+
+.order-button-bule {
+    color: blue;
+}
+
+.order-button-none {
+}
+
+.col.button.makesureBuyBtn {
+    margin: 1%;
+    line-height: 20px;
+    border-color: transparent;
+    background: #ff7e00;
+    box-shadow: none;
+    border-radius: 20px;
+    color: white;
+}
+
+.col.button.gotoShoppingBtn {
+    margin: 1%;
+    line-height: 20px;
+    border-color: transparent;
+    background: #ff7e00;
+    box-shadow: none;
+    border-radius: 20px;
+    color: white;
+    zoom: 0.8;
+}
+
+.col.button.makesureChangeMilkBtn {
+    margin: 1%;
+    border-color: transparent;
+    background: #ff7e00;
+    box-shadow: none;
+    border-radius: 15px;
+    color: white;
+    width: 90px;
+    line-height: 100%;
+    font-size: 12px;
+    margin-left: 15px
+}
+
+/************商品详情购物车图********************/
+.productDetailShopping {
+    /*margin: 1%;*/
+    border-color: transparent;
+    background: #ff7e00;
+    box-shadow: none;
+    border-radius: 25px;
+    color: white;
+    line-height: 51%;
+    font-size: 15px;
+    margin-left: 13px;
+    width: 45%;
+    padding: 5%;
+}
+
+.productDetailShopping img {
+    margin-top: -15%;
+
+    width: 25%;
+}
+
+.productDetailShopping a {
+    color: white;
+    margin-top: -15%;
+    margin-left: 30px;
+}
+
+.productDetailBuysoon {
+    /*margin: 1%;*/
+    border-color: transparent;
+    background: #ff7e00;
+    box-shadow: none;
+    border-radius: 25px;
+    color: white;
+    line-height: 100%;
+    font-size: 15px;
+    margin-left: 32px;
+    width: 38%;
+}
+
+.productDetailBuysoon img {
+    width: 25%;
+    padding-top: 5px;
+}
+
+.productDetailBuysoon a {
+    color: white;
+    position: relative;
+    top: -3px;
+    left: 5px;
+}
+
+.changeMilkMakeSureBtn {
+    margin: 1%;
+    border-color: transparent;
+    background: #fe0000;
+    box-shadow: none;
+    border-radius: 18px;
+    color: white;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.singleSendBtn {
+    width: 125px;
+    padding-left: 15px;
+    zoom: 0.4;
+    margin: 1%;
+    border-color: transparent;
+    background: #ff7e00;
+    box-shadow: none;
+    border-radius: 15px;
+    color: white;
+}
+
+.deliverDays-bule {
+    background: darkblue;
+}
+.loginbackground
+{
+    background: url(../img/login/background.png)
+}
+.adGrayBackground {
+    margin-top: -30px;
+    height: 30px;
+    font-size: 10px;
+    position: relative;
+    background: url(../img/homePage/adGray_bg.png)
+}
+
+.myLoc_city {
+    width: 44px;
+    height: 16px;
+    background: #ff7e00;
+    border-radius: 5px;
+    vertical-align: middle;
+    font-size: 15px;
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-bottom: 2px;
+    margin-top: -10px;
+}
+
+.navListBtn {
+    width: 75px;
+    height: 20px;
+    color: #ffffff;
+    padding: 0%;
+    border-radius: 10px;
+    /*border-color: transparent;*/
+    /*border-color: #ff7e00;*/
+    background: #f0e0be;
+    margin-left: -13%;
+}
+
+/*#orderTopBtn {*/
+/*overflow: hidden;*/
+/*margin-left: 0%;*/
+/*margin-top: 44px;*/
+
+/*position: relative;*/
+/*text-align: center;*/
+/*text-decoration: none;*/
+/*cursor: pointer;*/
+/*}*/
+
+.cityLoc {
+    margin-left: 0%;
+    margin-top: -125%;
+    /*overflow: hidden;*/
+    /*position: relative;*/
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+    /*cursor: pointer;*/
+}
+
+/*首页购物车按钮*/
+#box {
+    overflow: hidden;
+    margin-left: 75%;
+    margin-top: 125%;
+    zoom: 0.5;
+    /*margin-bottom: 100%;*/
+
+}
+
+#box button {
+    background: url(../img/homePage/shopCar-bg.png);
+    position: relative;
+    float: left;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    /*margin: 20px;*/
+    line-height: 100px;
+    text-align: center;
+    font-size: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    /*color: #fff;*/
+    /*background: #000;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    /*border-color: lightgrey;*/
+    border-color: transparent;
+
+    /* border-radius  */
+    /*-webkit-border-radius:50px;*/
+    /*-moz-border-radius:50px;*/
+    border-radius: 29px;
+}
+
+.shopCarBadge {
+    /*padding-top: 0px;*/
+    /*padding-bottom: 1px;*/
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 4px;
+    width: 35px;
+    height: 35px;
+    color: #ffffff;
+    background: red;
+    font-size: 12px;
+    border-radius: 18px
+}
+
+.shopCarBadge_0 {
+    padding-top: 5px;
+    /*padding-bottom: 1px;*/
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 4px;
+    margin-top: 4px;
+    width: 35px;
+    height: 35px;
+    color: #ffffff;
+    background: transparent;
+    font-size: 12px;
+    border-radius: 18px
+}
+
+/*.shopCarBadge_0 {*/
+/*margin-left: 6px;*/
+/*margin-top: 5px;*/
+/*width: 35px;*/
+/*height: 35px;*/
+/*color: transparent;*/
+/*background: transparent;*/
+/*font-size: 12px;*/
+/*border-radius: 18px*/
+/*}*/
+
+#noPlay_playMethod {
+    position: relative;
+    float: left;
+    width: 101%;
+    height: 200px;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    /*margin: 0;*/
+    /*margin-top: 90%;*/
+    margin-bottom: 0;
+}
+
+.title.title-center {
+    text-align: center;
+}
+
+.card.no-margin-lr {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.container {
+    height: 160px;
+}
+
+.container img {
+    border: 0;
+    vertical-align: top;
+    height: 160px;
+}
+
+.button.button-small.monthButton {
+    margin: 1%;
+    border-color: transparent;
+    background: #8b8b8d;
+    box-shadow: none;
+    border-radius: 12px;
+    color: white;
+    width: 16%;
+    font-size: 10px;
+}
+
+.button.button-small.monthButton-click {
+    /*margin:1%;*/
+    /*border-color: transparent;*/
+    background: #ff7e00;
+    /*box-shadow: none;*/
+    /*border-radius: 8px;*/
+    /*color: white;*/
+}
+
+.cityLocButton {
+    margin: 1%;
+    border-color: transparent;
+    background: #ffd485;
+    box-shadow: none;
+    border-radius: 8px;
+    color: #ffffff;
+    width: 16%;
+}
+
+.orderTyleBtn {
+    font-size: 10px;
+    margin: 0%;
+    padding: 0%;
+    border-color: #ff7e00;
+    background: #f0f0f0;
+    /*box-shadow: none;*/
+    color: #000000;
+    width: 30%;
+    height: 40px;
+}
+
+.bg-grey {
+    background-color: #f8f8f8;
+    transparent: 50%
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.padding-5 {
+    padding: 5px;
+}
+
+.padding-15 {
+    padding: 15px;
+}
+
+.icon-wechat {
+    background: url(../img/wechat.png) no-repeat left center;
+    background-size: 24px;
+    padding-left: 35px;
+    height: 24px
+}
+
+.icon-alipay {
+    background: url(../img/alipay.png) no-repeat left center;
+    background-size: 24px;
+    padding-left: 35px;
+    height: 24px
+}
+
+.icon-cash {
+    background: url(../img/cash.png) no-repeat left center;
+    background-size: 24px;
+    padding-left: 35px;
+    height: 24px
+}
+
+/**
+*以下是康诺专属配色，统一样式 create by sunhao
+*/
+
+/*康诺客户APP-头部*/
+.bar-kangnuo {
+    background-color: #f0e0be;
+}
+
+/*康诺客户APP-浅色提交按钮*/
+.button.button-kn-light {
+    border-radius: 10px;
+}
+
+/*康诺客户APP-深色提交按钮*/
+.button.button-kangnuo {
+    background-color: #ff7e00;
+    border-color: transparent;
+}
+
+/***��ַ����**/
+/**
+.addaddress{
+    margin-top: -8%;
+    height: 92px;
+    background: url("../img/address/add.png") no-repeat;
+
+}**/
+
+.bar-stable .button.button-icon {
+    border-color: transparent;
+    background: none;
+    color: #ff7e00;
+}
+
+.button-self {
+    border-color: #ff7e00;
+    background-color: #ff7e00;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0 12px;
+    min-width: 52px;
+    min-height: 47px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    vertical-align: top;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.button-self2 {
+    border-color: #ff7e00;
+    background-color: #f0f0f0;
+    color: #111111;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0 12px;
+    min-width: 52px;
+    min-height: 47px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    vertical-align: top;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.default-self {
+    background: #ff7e00;
+    color: #f8f8f8;
+    font-size: 10px;
+}
+
+.default-self2 {
+    background: #9b999a;
+    color: #f8f8f8;
+    font-size: 10px;
+}
+
+.addaddress img {
+    float: left;
+    width: 11%;
+    padding-left: 3%;
+    margin-top: -20px;
+}
+
+.addaddress h4 {
+    font-size: 19px;
+    color: #111111;
+}
+
+.addressBorder {
+    width: 400px;;
+    height: 200px;
+    background: url(../img/changeAddress/addressBorder.png) no-repeat left center;
+    /*background-size: 150%;*/
+    zoom: 0.7;
+    /*background-width:80%;*/
+    /*background-height:80%*/
+}
+
+.scroll-content-self {
+    background: #e9ebe6;
+}
+
+.top-self {
+    margin-top: 15px;
+}
+
+.back-self img {
+    width: 50%;
+    padding-top: 8%;
+}
+
+.title-self {
+    font-weight: bold;
+    top: 5px;
+}
+
+/***暂停配送**/
+.list_h4 h4 {
+    margin-left: 4%;
+}
+
+.list_h4 a .p2 {
+    margin-top: 16%;
+}
+
+.button-red-self {
+    border-radius: 25px;
+    margin: -1.5%;
+    padding: 0;
+    width: 30%;
+    background: #fe0000;
+    color: #f8f8f8;
+}
+
+.date_bg input {
+    /*border-radius: 25px;border: 1px solid #ff7e00; background: #9a9999;*/
+    /*width: 90%;padding-left: 10px;*/
+    /*background: url("../img/data01.png") 6px -1px no-repeat;background-size: 93% 36px;*/
+}
+
+.top-self {
+    margin-top: 15px;
+}
+
+.back-self img {
+    width: 50%;
+    padding-top: 8%;
+}
+
+.title-self {
+    font-weight: bold;
+    top: 5px;
+}
+
+.confirmFont {
+    font-size: 12px;
+}
+
+.buySoonDecreseBtn {
+    margin-left: 30px;
+    margin-top: 8px;
+    zoom: 1;
+    width: 35px;
+    height: 20px;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px
+}
+
+#buySoonInputBtn {
+    background: lightgrey;
+    text-align: center;
+    zoom: 1;
+    height: 30px;
+    margin-top: 8px;
+    border-radius: 0px
+}
+
+.buySoonAddBtn {
+    margin-top: 8px;
+    zoom: 1;
+    width: 35px;
+    height: 20px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px
+}
+
+.button.button-icon.back-button-icon {
+    width: 40px;
+    background: url(../img/backBtn.png) no-repeat left center;
+    background-size: 34px;
+}
+
+/*康诺客户APP-按钮圆边*/
+.btnFillet {
+    background-color: #ff7e00;
+
+    /*text-shadow: 1px 1px 1px rgba(255,255,255, .22);*/
+
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+
+    /*-webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);*/
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, .29), inset 1px 1px 1px rgba(255, 255, 255, .44);
+    /*box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);*/
+
+    -webkit-transition: all 0.15s ease;
+    -moz-transition: all 0.15s ease;
+    -o-transition: all 0.15s ease;
+    -ms-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+}
+
+.orderDetailIcon {
+    position: absolute;
+    top: 40px;
+    left: 35px;
+    zoom: 0.6
+}
+
+.top-self {
+    margin-top: 15px;
+}
+
+.back-self img {
+    width: 50%;
+    padding-top: 8%;
+}
+
+.title-self {
+    font-weight: bold;
+    top: 5px;
+}
+
+/***��ͣ����**/
+.list_h4 h4 {
+    margin-left: 4%;
+}
+
+.list_h4 a .p2 {
+    margin-top: 16%;
+}
+
+/**add by sunhao*/
+.button.button-small.button-minus {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+}
+
+.button.button-small.button-plus {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#scrollWrap {
+    width: 300px;
+    height: 18px;
+    overflow: hidden;
+    background: #E6F6F6;
+}
+
+#scrollMsg li {
+    height: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+.buySoonRow {
+    line-height: 40px;
+    background: #f0f0f0;
+    font-size: 12px;
+    color: #1a1a1a;
+    /*font-size: 13px;*/
+}
+
+.acticityAds {
+    border: 1px solid #eee;
+    width: 668px;
+    font-size: 12px;
+    height: 24px;
+    overflow: hidden;
+}
+
+.acticityAds ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 32px;
+}
+
+.acticityAds ul li {
+    height: 26px;
+    line-height: 26px;
+    width: 320px;
+    float: left;
+    display: block
+}

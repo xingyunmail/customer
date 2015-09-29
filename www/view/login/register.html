@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button ion-home button-icon" style="color: #ff7e00" ui-sref="homePage"></button>
+    <h1 class="title">注册</h1>
+    <button class="button button-icon" style="color: #ff7e00" ui-sref="login">登陆</button>
+
+</ion-header-bar>
+
+<ion-content ng-controller="loginCtrl" class="loginbackground">
+
+    <div style="margin-top: 20%">
+
+
+
+        <div style="margin-left: 8%;margin-right: 8%;margin-top: 15px">
+
+            <div class="item item-input" style="height: 45px;border-radius: 6px;">
+                <!--<img class="" src="/img/登录注册/忘记密码@2X_07.png" style="margin-left: -8%;margin-right: 10px">-->
+                <div class="" style="width: 56px;margin-left: -6%">
+                    <img class="" src="img/login/phone.png" style="margin-left: 20%;width: 20px;height: 25px;vertical-align: middle">
+                </div>
+
+
+                <input type="text" placeholder="请输入登录手机号" ng-model="phone">
+                <!--<i class="icon ion-close-circled"  ng-click="phone=''" ng-show="phone"  style="width: 36px;height: 45px;padding-top: 5%;margin-right: 25%;background: red"></i>-->
+                <button class="button button-small" ng-model="verifyButton" ng-disabled="isDisabled"
+                        ng-click="getauthcode()"
+                        style="background-color:#ff7e00;height: 46px;color: #ffffff;border-radius: 6px;width: 40%;margin-right: -1%;text-align: center;border-color: #ff7e00">
+                    {{buttonValue || "获取验证码"}}
+                </button>
+
+
+            </div>
+
+            <input type="hidden" ng-model="Code">
+            <div class="item item-input " style="margin-top: 5%;height: 45px;border-radius: 6px">
+                <!--<img src="/img/登录注册/忘记密码@2X_10.png" style="margin-left: -6%;margin-right: 10px">-->
+                <div style="width: 45px;margin-left: -6%">
+                    <img src="img/login/verify.png"
+                         style="margin-left: 20%;width: 20px;height: 25px;vertical-align: middle">
+                </div>
+                <input type="text" placeholder="请输入验证码" ng-model="localCode">
+                <!--<i class="icon ion-close-circled"  ng-click="localCode=''" ng-show="localCode"  style="width: 36px;height: 45px;padding-top: 5%;padding-left: 12px;color: lightgrey"></i>-->
+
+
+            </div>
+            <div class="item item-input" style="margin-top: 5%;height: 45px;border-radius: 6px">
+                <!--<img src="/img/登录注册/登陆页图表@2X_10.png" style="margin-left: -6%;margin-right: 10px">-->
+                <div style="width: 45px;margin-left: -6%">
+                    <img src="img/login/password.png"
+                         style="margin-left: 20%;width: 20px;height: 25px;vertical-align: middle">
+                </div>
+                <input type="password" placeholder="请设置登录密码" ng-model="password">
+                <!--<i class="icon ion-close-circled"  ng-click="password=''" ng-show="password"  style="width: 36px;height: 45px;padding-top: 5%;padding-left: 12px;color: lightgrey"></i>-->
+
+
+            </div>
+            <div class="item item-input" style="margin-top: 5%;height: 45px;border-radius: 6px">
+                <!--<img src="/img/登录注册/登陆页图表@2X_10.png" style="margin-left: -6%;margin-right: 10px">-->
+                <div style="width: 45px;margin-left: -6%">
+                    <img src="img/login/password.png"
+                         style="margin-left: 20%;width: 20px;height: 25px;vertical-align: middle">
+                </div>
+                <input type="password" placeholder="请再次输入登录密码" ng-model="repassword">
+                <!--<i class="icon ion-close-circled"  ng-click="repassword=''" ng-show="repassword"  style="width: 36px;height: 45px;padding-top: 5%;padding-left: 12px;;color: lightgrey"></i>-->
+
+            </div>
+
+
+        </div>
+        <!--<div style="height: 30px;margin-left: 10%;background: #ffffff;margin-top: 6px"><h6 class="text-left assertive" ng-show="visible"-->
+                                                                                           <!--style="height: 20px">{{msg}}</h6></div>-->
+        <div style="margin-top: 8%;margin-left: 12%;margin-right: 12%;margin-top: 15%">
+            <button class="button button-block "
+                    style="background: #ff7e00;color: #ffffff;border-radius: 25px;border-color: #ff7e00"
+                    ng-click="registerClick()">立即注册
+            </button>
+        </div>
+    </div>
+
+</ion-content>
+
+
+
+
+
+
+

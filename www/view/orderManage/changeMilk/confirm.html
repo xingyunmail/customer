@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <div class="h1  title text-center" style="text-align: center; color: #000000">更换品种</div>
+
+    <menu-button></menu-button>
+</ion-header-bar>
+
+
+<ion-content>
+
+<div class="item" style="line-height: 10px;font-size: 12px">
+    已购奶品，统一安排配送
+</div>
+
+<div class="list">
+    <a class="item list-borderless" ng-repeat="prod in uniteProducts">
+        <div class="item-thumbnail-left" style="font-size: 12px">
+            <img ng-src="{{prod.icon}}" style="margin-top: 10px">
+
+            <strong class="row" style="margin-top: -15px">{{prod.name}}</strong>
+
+            <div class="row">
+                <div class="col">
+                    {{prod.prodType}}
+                </div>
+                <div class="col col-25" style="margin-top: -25px;">
+                    <img class="row" src="img/singleSend.png"
+                         style="width: 37px;height: 25px;margin-left: 15px;zoom:0.7;">
+                    <button class="row button singleSendBtn"
+                            ng-click="selectSingleSend(prod)">
+                        单独配送
+                    </button>
+                </div>
+            </div>
+
+            <div style="color: red; margin-left: 5px;margin-right: -15px;font-size: 14px">
+                ￥{{prod.price/100 | number : 2}}
+            </div>
+
+            <div class="row" style="line-height: 35px;margin-top: -10px">
+
+                <span class="col col-25">日配送量：</span>
+                <button class="button button-small ion-minus-round buySoonDecreseBtn"
+                        ng-click="prod.u_quantity <= 1 ? 1 : prod.u_quantity = prod.u_quantity - 1">
+                </button>
+                <input type="number" class="col-20" id="buySoonInputBtn"
+                       ng-model="prod.u_quantity" readonly="readonly"/>
+                <button class="button button-small ion-plus-round buySoonAddBtn"
+                        ng-click="prod.u_quantity = prod.u_quantity + 1">
+                </button>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+<div ng-if="uniteProducts.length > 0" >
+    <strong class="item item-divider confirmFont">
+        统一配送 <label style="color: red;font-size: 11px">优惠活动：满100元送20袋!</label>
+    </strong>
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-25" style="margin-left: 5px">配送频率：</span>
+
+        <radio-button class="row confirmFont" ng-model="$parent.$parent.unite_deliverRule" ng-change="updateUniteDeliverRule()">
+
+            <button class="col button button-small monthButton" value="EVERDAY">
+                天天送
+            </button>
+            <button class="col button button-small monthButton" value="NEXTDAY">
+                隔天送
+            </button>
+            <button class="col button button-small monthButton" value="WORKDAY">
+                工作日送
+            </button>
+            <button class="col button button-small monthButton" value="RESTDAY">
+                周末送
+            </button>
+        </radio-button>
+    </div>
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-25" style="margin-left: 5px">订购时长：</span>
+
+        <radio-button class="row confirmFont" ng-model="$parent.$parent.unite_Month" ng-change="updateUniteMonth()">
+            <button class="col button button-small monthButton" value="1">
+                一个月
+            </button>
+            <button class="col button button-small monthButton" value="2">
+                两个月
+            </button>
+            <button class="col button button-small monthButton" value="3">
+                三个月
+            </button>
+            <button class="col button button-small monthButton" value="6">
+                半年
+            </button>
+        </radio-button>
+    </div>
+
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-33" style="margin-left: 5px">开始时间：</span>
+        <input style="border-color: #ff7e00;margin-right: 15%;line-height: 35px;margin-top: 9px;font-size: 12px" class="col"
+               type="date"
+               ng-model="$parent.$parent.unite_beginDate">
+    </div>
+
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-33" style="margin-left: 5px">结束时间：</span>
+        <input style="border-color: #ff7e00;margin-right: 15%;;line-height: 35px;margin-top: 9px;font-size: 12px" class="col"
+               type="date"
+               ng-model="$parent.$parent.unite_endDate" ng-click="changeUniteEndDate()">
+    </div>
+</div>
+
+
+<div ng-repeat="prod in singleProducts" style="margin-top: 20px">
+
+    <strong class="item item-divider confirmFont" style="width: 100%">
+        单独配送 <label style="color: red; font-size: 11px">优惠活动：满100元送20袋!</label>
+    </strong>
+
+    <div class="item item-thumbnail-left confirmFont">
+        <img ng-src="{{prod.icon}}" style="margin-top: 10px;width: 70px;height: 70px">
+
+        <strong class="row">{{prod.name}}</strong>
+
+        <div class="row">
+            <div class="col">
+                {{prod.prodType}}
+            </div>
+            <div class="col col-34" style="margin-top: -25px;">
+                <img class="row" src="../../img/singleSend.png"
+                     style="width: 37px;height: 25px;margin-left: 30px;zoom: 0.7">
+                <button class="row button singleSendBtn"
+                        ng-click="selectSingleSend(prod)" style="width: 175px">
+                    取消单独配送
+                </button>
+            </div>
+        </div>
+
+        <div style="color: red; margin-left: 5px;margin-right: -15px">
+            ￥{{prod.price/100 | number : 2}}
+        </div>
+
+        <div class="row confirmFont" style="line-height: 35px;margin-top: -10px">
+
+            <span class="col col-25">日配送量：</span>
+            <button class="button button-small ion-minus-round buySoonDecreseBtn"
+                    ng-click="prod.s_quantity <= 1 ? 1 : prod.s_quantity = prod.s_quantity - 1">
+            </button>
+            <input type="number" class="col-20"
+                   style="background: lightgrey;text-align: center;zoom: 1;height: 30px;margin-top: 8px;border-radius: 0px"
+                   ng-model="prod.s_quantity" readonly="readonly"/>
+            <button class="button button-small ion-plus-round buySoonAddBtn"
+                    ng-click="prod.s_quantity = prod.s_quantity + 1">
+            </button>
+        </div>
+    </div>
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-25" style="margin-left: 5px">配送频率：</span>
+
+        <radio-button class="row confirmFont" ng-model="prod.s_deliverRule">
+
+            <button class="col button button-small monthButton" value="EVERDAY">
+                天天送
+            </button>
+            <button class="col button button-small monthButton" value="NEXTDAY">
+                隔天送
+            </button>
+            <button class="col button button-small monthButton" value="WORKDAY">
+                工作日送
+            </button>
+            <button class="col button button-small monthButton" value="RESTDAY">
+                周末送
+            </button>
+        </radio-button>
+    </div>
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-25" style="margin-left: 5px">订购时长：</span>
+
+        <radio-button class="row confirmFont" ng-model="prod.s_Month">
+            <button class="col button button-small monthButton" value="1">
+                一个月
+            </button>
+            <button class="col button button-small monthButton" value="2">
+                两个月
+            </button>
+            <button class="col button button-small monthButton" value="3">
+                三个月
+            </button>
+            <button class="col button button-small monthButton" value="6">
+                半年
+            </button>
+        </radio-button>
+    </div>
+
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-33" style="margin-left: 5px">开始时间：</span>
+        <input style="border-color: #ff7e00;margin-right: 15%;line-height: 35px;margin-top: 9px;font-size: 12px" class="col"
+               type="date"
+               ng-model="prod.s_beginDate">
+    </div>
+
+
+    <div class="row item confirmFont" style="line-height: 40px">
+        <span class="col col-33" style="margin-left: 5px">结束时间：</span>
+        <input style="border-color: #ff7e00;margin-right: 15%;;line-height: 35px;margin-top: 9px;font-size: 12px" class="col"
+               type="date"
+               ng-model="prod.s_endDate">
+    </div>
+
+</div>
+
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="row bar bar-light bar-footer confirmFont" style="background: #dddcdc">
+        <!--<div class="col">合计：{{totalCount}}袋</div>-->
+        <div class="col col-34" style="color: #525151">差额合计：</div>
+        <div class="col" style="color: #ff7e00;margin-left: -15px;margin-right: -15px">￥{{differencePrice/100
+            | number:2}}
+        </div>
+        <button class="col button makesureChangeMilkBtn" ng-click="clickConfirmOrder()">
+            确认更换
+        </button>
+    </div>
+
+</ion-footer-bar>
+
+

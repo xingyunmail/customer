@@ -1,0 +1,65 @@
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <h1 class="title">订单支付</h1>
+</ion-header-bar>
+<br>
+<ion-content>
+    <div class="list">
+        <label class="item ">订单编号：{{orderId}}</label>
+        <label class="item ">订单总价：{{totalPrice/100|number:2}}元</label>
+    </div>
+    <ul class="list" ng-if="wallet>0">
+        <li class="item item-checkbox">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="info.useLeft" ng-change="changeUseLeft()">
+            </label>
+            使用账户余额:{{wallet/100|number:2}}元
+        </li>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="list" ng-if="onlinePay>0">
+        <label class="item item-input">
+            <label class="input-label">
+                使用第三方支付
+            </label>
+
+            <div style="color: red;"><strong>￥{{onlinePay/100|number:2}}</strong></div>
+        </label>
+        <label class="item item-radio item-avatar-left">
+            <input type="radio" name="payType"  ng-model="info.channel" value="alipay">
+
+            <div class="item-content ">
+                <img src="img/pay/alipay.png">
+
+                <h2>支付宝</h2>
+
+                <p>推荐拥有支付宝的客户</p>
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio item-avatar-left">
+            <input type="radio" name="payType" ng-model="info.channel" value="wx">
+
+            <div class="item-content ">
+                <img src="img/pay/wxpay.png">
+
+                <h2>微信支付</h2>
+
+                <p>推荐已安装微信客户端的用户使用</p>
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+        </label>
+
+    </div>
+    <label style="padding-left: 15px;display: block;padding-right: 15px">
+        <button class="button button-full button-kangnuo "
+                ng-click="submit()">
+            <strong style="color: white;">确认支付</strong>
+        </button>
+    </label>
+</ion-content>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <div class="h1  title" style="text-align: center; color: #000000; margin-top: 5px">暂停配送</div>
+    <menu-button></menu-button>
+</ion-header-bar>
+    <ion-content class="has-header scroll-content-self" ng-controller="stopDistributionController">
+        <label style="text-align:center"><span style="color: red;text-align:center" ng-model="des">{{des}}</span></label>
+        <div class="list list_h4" ng-repeat="detail in details">
+
+           <h4>{{detail.prodName}}</h4>
+            <div class="item item-thumbnail-left">
+                <img src="../../img/sn2.jpg">
+                <label class="item-input">
+                    <span class="col-45">暂停配送时间:</span>
+                    <span class="date_bg"><input  id="end{{$index}}" name="end{{$index}}" ng-model="detail.stopDate" type="date" ng-change="checkStopDate('{{$index}}')"></span>
+                </label>
+                <label class="item-input">
+                    <span class="col-45">下次配送日期:</span>
+                    <span class=""><input name="next{{$index}}" ng-model="detail.beginDate" ng-change="checkStartStop('{{$index}}')" type="date"></span>
+                </label>
+            </div>
+
+        </div>
+
+
+    </ion-content>
+<ion-footer-bar>
+        <div class="row bar bar-footer" style="background: #dddbdc">
+            <div class="col text-center">
+                <button class="button button-red-self" ng-click="stopOpertion(details)">
+                    确认暂停
+                </button>
+            </div>
+    </div>
+</ion-footer-bar>

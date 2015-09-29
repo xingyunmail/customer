@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-stable">
+    <button class="button ion-arrow-left-c button-icon" back-button></button>
+    <h1 class="title">更换日配与频率</h1>
+    <button class="button button-icon icon ion-navicon "></button>
+</ion-header-bar>
+
+<ion-content>
+
+    <div class="list">
+
+        <ion-item class="item item-thumbnail-left">
+
+            <img src="img/sn2.jpg">
+            <div class="item-input-inset">
+                <h2>品种:酸奶nainaianai  <span class="col-offset-15">余量:20</span></h2>
+
+            </div>
+
+            <div class="item-input-inset">
+                <h2>日配：</h2>
+                <button class="button button-small ion-minus-round"
+                        ng-click="detail.quantity<=1?1:detail.quantity=detail.quantity-1"></button>
+                <input disabled type="text" style="background: lightgrey;" class="col-10 text-center" ng-model="detail.quantity" ng-init="detail.quantity=1"/>
+                <button class="button button-small ion-plus-round "
+                        ng-click="detail.quantity=detail.quantity+1"></button>
+            </div>
+            <div class="item-input-inset">
+                <h2>频率： <select>
+                    <option>天天送</option>
+                    <option>隔日送</option>
+                    <option>工作日送</option>
+                    <option>周末送</option>
+                </select></h2>
+
+            </div>
+
+        </ion-item>
+
+        <ion-item class="item item-thumbnail-left">
+
+            <img src="img/sn2.jpg">
+            <div class="item-input-inset">
+                <h2>品种:酸奶nainaianai  <span class="col-offset-15">余量:20</span></h2>
+
+            </div>
+
+            <div class="item-input-inset">
+                <h2>日配：</h2>
+                <button class="button button-small ion-minus-round"
+                        ng-click="detail.quantity<=1?1:detail.quantity=detail.quantity-1"></button>
+                <input disabled type="text" style="background: lightgrey;" class="col-10 text-center" ng-model="detail.quantity" ng-init="detail.quantity=1"/>
+                <button class="button button-small ion-plus-round "
+                        ng-click="detail.quantity=detail.quantity+1"></button>
+            </div>
+            <div class="item-input-inset">
+                <h2>频率： <select>
+                    <option>天天送</option>
+                    <option>周末送</option>
+                </select></h2>
+
+            </div>
+
+        </ion-item>
+
+        <label class="item item-input">
+            <span class="input-label">生效日期：</span>
+            <input type="date" ng-model="effectiveDate">
+        </label>
+
+
+    </div>
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="bar bar-footer" style="margin: 0;padding: 0;">
+        <button class="button button-positive button-full" style="margin: 0;padding: 0;" ng-click="changeDailtFunc()">
+            确认更换
+        </button>
+    </div>
+</ion-footer-bar>

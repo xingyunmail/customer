@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <!--<a class="button button-icon icon" back-button>-->
+    <!--<img src="../../img/backBtn.png" style="margin-top: -5px;margin-left: -10px;zoom: 0.5" ui-sref="homePage"/>-->
+    <!--</a>-->
+
+    <div class="h1  title text-center" style="text-align: center; color: #000000">设置配送</div>
+
+</ion-header-bar>
+
+<ion-content has-bouncing="true" style="background: #f0f0f0">
+
+<img ng-src="{{model.images[0]}}" style="width: 100%;margin-top: 5px;margin-bottom: 5px">
+
+<div class="item" style="height: 80px;background: #f0f0f0;font-size: 12px">
+    <div class="row" style="margin-top: -8px;">
+        <strong class="col col-80 text-left" style="margin-left: -5px">{{model.name}}</strong>
+
+        <div class="col" style="color: red">￥{{model.price/100 | number:2}}</div>
+    </div>
+
+    <div class="row text-left" style="color: red">
+        <div class="col col-25" style="margin-left: -5px">
+            优惠活动：
+        </div>
+
+        <!--<marquee class="col" height="50px" direction="up" scrollamount="1" onmouseover="this.stop()"-->
+        <!--onmouseout="this.start()">-->
+        <!--<label ng-repeat="actiName in allActiName">{{actiName}}<br/></label>-->
+        <!--&lt;!&ndash;满1000赠商品!<br/>&ndash;&gt;-->
+        <!--&lt;!&ndash;满2000赠实物!<br/>&ndash;&gt;-->
+        <!--&lt;!&ndash;满三个月赠一个月!<br/>&ndash;&gt;-->
+        <!--&lt;!&ndash;满一年赠半年!<br>&ndash;&gt;-->
+        <!--</marquee>-->
+
+        <div id="allActicity" class="acticityAds" style="margin-left: -30px">
+            <ul id="acticityName_ul" style="height: 120px">
+                <li><a style="color: red" value="0"></a></li>
+                <li ng-repeat="actiName in allActiName" style="color: red">
+                     {{actiName}}
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="row item buySoonRow">
+    <span class="col col-25" style="margin-left: 11px">日配送量：</span>
+    <button class="button button-small ion-minus-round buySoonDecreseBtn"
+            ng-click="$parent.buy_quantity < 2 ? 1 : $parent.buy_quantity = $parent.buy_quantity - 1">
+    </button>
+    <input type="number" class="col-20"
+           style="background: lightgrey;text-align: center;zoom: 1;height: 30px;margin-top: 8px;border-radius: 0px;font-size: 10px"
+           ng-model="$parent.buy_quantity" ng-init="$parent.buy_quantity = 1" readonly="readonly"/>
+    <button class="button button-small ion-plus-round buySoonAddBtn"
+            ng-click="$parent.buy_quantity = $parent.buy_quantity + 1">
+    </button>
+
+</div>
+
+<div class="row item buySoonRow">
+    <span class="col col-25" style="margin-left: 11px">配送频率：</span>
+
+    <radio-button class="row" ng-model="$parent.buy_deliverRule" ng-change="setDeliverRule()"
+                  style="margin-left: -20px">
+
+        <button class="col button button-small monthButton" value="EVERDAY">
+            天天送
+        </button>
+        <button class="col button button-small monthButton" value="NEXTDAY">
+            隔天送
+        </button>
+        <button class="col button button-small monthButton" value="WORKDAY">
+            工作日送
+        </button>
+        <button class="col button button-small monthButton" value="RESTDAY">
+            周末送
+        </button>
+    </radio-button>
+</div>
+
+<div class="row item buySoonRow">
+    <span class="col col-25" style="margin-left: 11px">订购时长：</span>
+
+    <radio-button class="row" ng-model="$parent.month" ng-change="setMonth()" style="margin-left: -20px">
+        <button class="col button button-small monthButton" value="1">
+            一个月
+        </button>
+        <button class="col button button-small monthButton" value="2">
+            两个月
+        </button>
+        <button class="col button button-small monthButton" value="3">
+            三个月
+        </button>
+        <button class="col button button-small monthButton" value="6">
+            半年
+        </button>
+    </radio-button>
+</div>
+
+
+<div class="row item buySoonRow">
+    <span class="col col-33" style="margin-left: 11px">开始时间：</span>
+    <input style="border-color: #ff7e00;margin-right: 15%;line-height: 30px;margin-top: 8px;font-size: 10px" class="col"
+           type="date"
+           ng-model="$parent.buy_beginDate">
+</div>
+
+
+<div class="row item buySoonRow">
+    <span class="col col-33" style="margin-left: 11px">结束时间：</span>
+    <input style="border-color: #ff7e00;margin-right: 15%;;line-height: 30px;margin-top: 8px;font-size: 10px"
+           class="col"
+           type="date"
+           ng-model="$parent.buy_endDate" ng-click="changeEndDate()">
+</div>
+
+
+<div class="row item buySoonRow">
+    <span class=" col col-33" style="margin-left: 11px">优惠：</span>
+    <select class="col"
+            style="margin-top: 10px;margin-bottom: 8px;margin-right: 15%;border-color: #ff7e00;font-size: 10px"
+            ng-model="$parent.activityInfo"
+            ng-change="selectActivityType()">
+        <option value="0">--请选择优惠类型--</option>
+        <option ng-repeat="activity in activityInfos" value="{{activity}}">
+            {{activity.name}}
+        </option>
+    </select>
+</div>
+
+
+<div class="item card" ng-repeat="prod in selectedActi">
+
+    <div ng-show="myActivity" class="item">
+
+        <strong style="font-size: 12px">我的赠品</strong>
+
+        <div class="item item-thumbnail-left" style="margin-top: 10px;font-size: 12px">
+            <img style="margin-top: 10px" src="{{prod.icon}}">
+
+            <div style="margin-top: 10px">
+                <strong class="item-text-wrap">{{prod.name}}</strong>
+
+                <div style="color: red;margin-top: 5px">￥{{prod.price/100 | number:2}}</div>
+
+                <div style="margin-top: 5px" ng-show="acti_products">
+                    赠品数量：<label>{{prod.quantity}}&nbsp;&nbsp;{{prod.unit}}</label>
+                </div>
+
+                <div style="margin-top: 5px" ng-show="acti_gifts">
+                    赠品数量：<label>{{prod.number}}&nbsp;&nbsp;{{prod.unit}}</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-show="activitySendInfo" style="margin-top: -10px;font-size: 12px">
+
+        <div class="row item" style="line-height: 40px;font-size: 12px">
+
+            <span class="col col-25" style="margin-left: 5px">日配送量：</span>
+            <button class="button button-small ion-minus-round buySoonDecreseBtn"
+                    ng-click="prod.acti_quantity < 2 ? 1 : prod.acti_quantity = prod.acti_quantity - 1">
+            </button>
+            <input type="number" class="col-20"
+                   style="background: lightgrey;text-align: center;zoom: 1.0;height: 30px;margin-top: 8px;border-radius: 0px;;font-size: 10px"
+                   ng-model="prod.acti_quantity" readonly="readonly"/>
+            <button class="button button-small ion-plus-round buySoonAddBtn"
+                    ng-click="prod.acti_quantity < prod.quantity ? prod.acti_quantity = prod.acti_quantity + 1 : prod.acti_quantity">
+            </button>
+
+        </div>
+
+
+        <div class="row item" style="line-height: 40px;font-size: 12px">
+            <span class="col col-20" style="margin-left: 5px">配送频率：</span>
+
+            <radio-button class="row" ng-model="prod.acti_deliverRule" style="margin-left: 5px;margin-right: -12px">
+
+                <button class="col button button-small monthButton" value="EVERDAY">
+                    天天送
+                </button>
+                <button class="col button button-small monthButton" value="NEXTDAY">
+                    隔天送
+                </button>
+                <button class="col button button-small monthButton" value="WORKDAY">
+                    工作日送
+                </button>
+                <button class="col button button-small monthButton" value="RESTDAY">
+                    周末送
+                </button>
+
+            </radio-button>
+        </div>
+
+        <div class="row item" style="line-height: 40px;font-size: 12px">
+            <span class="col col-33" style="margin-left: 5px">开始时间：</span>
+            <input style="border-color: #ff7e00;margin-right: 15%;line-height: 30px;margin-top: 8px;font-size: 10px"
+                   class="col"
+                   type="date" ng-model="prod.acti_beginDate">
+        </div>
+
+        <div class="row item" style="line-height: 40px;font-size: 12px">
+            <span class="col col-33" style="margin-left: 5px">结束时间：</span>
+            <input style="border-color: #ff7e00;margin-right: 15%;;line-height: 30px;margin-top: 8px;font-size: 10px"
+                   class="col"
+                   type="date"
+                   ng-model="prod.acti_endDate" readonly="readonly">
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="row">-->
+<!--<div class="col col-10"></div>-->
+<!--<div class="col col-10">-->
+<!--<label class="checkbox">-->
+<!--<input type="checkbox"-->
+<!--style="zoom: 0.8;"-->
+<!--ng-click="needMilkBox()" name="milkBox">-->
+<!--<!--background: url(../../img/checked.png);-->
+<!--</label>-->
+<!--</div>-->
+
+<!--<div class="col" style="margin-top: 8px;font-size: 15px">-->
+<!--需要牛奶箱-->
+<!--</div>-->
+
+<!--<div class="col col-50" style="margin-top: 8px;font-size: 13px;color: #9a9999">-->
+<!--￥10.0 (奶箱不参与活动)-->
+<!--</div>-->
+
+<!--</div>-->
+
+</ion-content>
+
+<ion-footer-bar>
+
+    <div class="row bar bar-light bar-footer" style="background: #dddcdc;font-size: 12px;">
+        <div class="col col-34" style="color: #525151">订单金额合计：</div>
+        <div class="col" style="color: #ff7e00;margin-left: -15px;margin-right: -15px">￥{{totalPrice/100
+            |
+            number:2}}
+        </div>
+        <button class="col button makesureBuyBtn"
+                style="width: 90px;line-height: 100%;margin-left: 15px"
+                ng-click="gotoConfirmOrder()">确定
+        </button>
+    </div>
+
+</ion-footer-bar>

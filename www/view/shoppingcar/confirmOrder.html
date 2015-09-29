@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title">订单提交</h1>
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content ng-controller="confirmOrderCtrl" class="has-footer">
+    <div>
+        <div class="card">
+            <div class="item item-text-wrap row " style="padding: 16px;" ng-click="showAddress()">
+                <div class="col-20"><strong>送至：</strong></div>
+                <div class="item-text-wrap col-75"><p>{{address.name}}</p><p>{{address.phone}}</p><p>{{address.province}}{{address.city}}{{address.district}}{{address.address}}</p></div>
+                <div class="col-10"><i class="item-icon-right ion-chevron-right"></i></div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="isShowDiscount">
+            <div class="item item-text-wrap row " style="padding: 16px;">
+                <div class="col-30"><strong>优惠活动：</strong></div>
+                <div class="item-text-wrap col-70">
+                    <p>{{discountInfo.name}}</p>
+                </div>
+            </div>
+
+            <!--discount milk div-->
+            <div  class="item no-padding" ng-show="isShowMilkGift">
+                <ion-item class="item item-thumbnail-left" ng-repeat="detail in discountInfo.details">
+
+                    <img ng-src="{{detail.image}}">
+
+                    <h2><a style="text-decoration:none;">{{detail.name}}</a></h2>
+
+                    <label>日配量: {{detail.quantity}}</label>
+
+                    <p> 配送周期：
+                        <select disabled ng-model="detail.deliverRules">
+                            <option value="EVERDAY">天天送</option>
+                            <option value="NEXTDAY">隔天送</option>
+                            <option value="WORKDAY">工作日送</option>
+                            <option value="RESTDAY">周末送</option>
+                        </select>
+                    </p>
+                    <p>赠送总量：{{detail.totalQuantity}} {{detail.unit}}</p>
+
+
+                    <p>开始时间：{{detail.beginDate |date : 'yyyy-MM-dd'}}</p>
+
+                    <p>结束时间：{{detail.endDate |date : 'yyyy-MM-dd'}}</p>
+
+                    <h3 style="color: red">价格:￥0元</h3>
+
+                </ion-item>
+            </div>
+
+
+            <!--discount real product div-->
+            <div class="item no-padding" ng-show="isShowRealGift">
+                <ion-item class="item item-thumbnail-left" ng-repeat="gift in discountInfo.gifts">
+
+                    <img ng-src="{{gift.image}}">
+
+                    <h2><a style="text-decoration:none;">{{gift.name}}</a></h2>
+
+                    <p>数量: {{gift.number}}</p>
+
+                    <h3 style="color: red">价格:￥0元</h3>
+                </ion-item>
+            </div>
+
+        </div>
+
+        <div class="list card">
+            <div class="item item-thumbnail-left" ng-repeat="milkInfo in milkInfos">
+
+                <img ng-src="{{milkInfo.image}}">
+                <!--点击跳转到产品详情-->
+                <h2>
+                    <a ui-sref="home({{milkInfo.prodId}})" style="text-decoration:none;">{{milkInfo.prodName}}</a>
+                </h2>
+
+                <p>单价:￥{{milkInfo.price/100|number:2}}元</p>
+
+                <p>日配数量: {{milkInfo.quantity}}</p>
+
+                <p>配送频率: <select ng-model="milkInfo.deliverRules" disabled>
+                    <option value="EVERDAY">天天送</option>
+                    <option value="NEXTDAY">隔天送</option>
+                    <option value="WORKDAY">工作日送</option>
+                    <option value="RESTDAY">周末送</option>
+                </select></p>
+
+                <p>配送天数: {{milkInfo.deliverDays}}</p>
+
+                <p>始配日期: {{milkInfo.beginDate|date : 'yyyy-MM-dd'}}</p>
+
+                <p>始配日期: {{milkInfo.endDate|date : 'yyyy-MM-dd'}}</p>
+
+                <h3 style="color: red">总价:￥{{milkInfo.quantity*milkInfo.price*milkInfo.deliverDays/100 | number:2}} 元</h3></p>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="list">
+                <label class="item">
+                    <div class="text-center"><h4 style="color: red">账户余额：{{accountMoney/100 | number:2}}元</h4></div>
+                </label>
+                <label class="item item-radio" >
+                    <input type="radio" name="group" value="NETPAY"  ng-click="getSubmitPayMethod('NETPAY')">
+
+                    <div class="item-content">
+                        <div class="icon-alipay">在线支付</div>
+                    </div>
+                    <i class="radio-icon ion-checkmark-circled"></i>
+                </label>
+                <label class="item item-radio" >
+                    <input type="radio" name="group" value="DELEGATED"  ng-click="getSubmitPayMethod('DELEGATED')">
+
+                    <div class="item-content">
+                        <div class="icon-cash">上门收款</div>
+                    </div>
+                    <i class="radio-icon ion-checkmark-circled"></i>
+                </label>
+            </div>
+        </div>
+
+    </div>
+</ion-content>
+
+<ion-footer-bar ng-controller="commitOrderCtrl">
+    <div class="bar bar-footer" style="margin: 0;padding: 0;">
+        <button class="button button-kangnuo button-full" style="margin: 0;padding: 0;" ng-click="commitOrder()">
+            <h4>确定提交(￥{{commitPrice/100|number:2}})</h4>
+        </button>
+    </div>
+</ion-footer-bar>

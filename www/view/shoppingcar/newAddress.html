@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title">新增地址</h1>
+</ion-header-bar>
+
+<ion-content class="has-footer" ng-controller="addAddressCtrl">
+    <form name="addAddress_form" ng-submit="addNewAddress()">
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">收货人</span>
+                <input type="text" ng-model="contact.name" required>
+
+            </label>
+            <label class="item item-input">
+                <span class="input-label">联系电话</span>
+                <input type="number" ng-model="contact.phone" ng-maxlength=11 required>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">市、区/县</span>
+                <input type="text" ng-value="contact.city+contact.district" ng-click="openCityModal()">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">详细地址</span>
+                <input type="text" ng-model="contact.address" required>
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-light button-kangnuo" type="submit">确认</button>
+        </div>
+    </form>
+</ion-content>
+
+ <!-- 城市选择-->
+<script id="selectCity.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar-kangnuo">
+            <h1 class="title">选择城市</h1>
+        </ion-header-bar>
+        <ion-content class="has-footer">
+
+            <div class="list">
+                <label class="item item-input" ng-repeat="city in citys" ng-click="closeCityModal($index)">
+                    <span class="input-label"  ng-model="contact.city">{{city.name}}</span>
+                </label>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>
+
+<!--区县选择-->
+<script id="selectTown.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar-kangnuo">
+            <h1 class="title">选择区/县</h1>
+        </ion-header-bar>
+        <div class="list">
+            <label class="item item-input" ng-repeat="district in districts" ng-click="closeTownModal($index)">
+                <span class="input-label"  ng-model="contact.district">{{district}}</span>
+            </label>
+        </div>
+    </ion-modal-view>
+</script>

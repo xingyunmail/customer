@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <div class="h1  title text-center" style="text-align: center; color: #000000">订单管理</div>
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content style="background: #e9ebe6">
+    <div>
+        <radio-button class="row" ng-model="orderTyleSelected" style="margin: 0%;padding: 0%">
+
+            <button class="col button button-small orderTyleBtn" value="未付款" ng-click="getNoSendList()">
+                未付款({{noSendList.length ? noSendList.length : 0}})
+            </button>
+            <button class="col button button-small orderTyleBtn" value="未完结" ng-click="getSendingList()">
+                未完结({{sendingList.length ? sendingList.length : 0}})
+            </button>
+            <button class="col button button-small orderTyleBtn" value="已完结" ng-click="getFinshingList()">
+                已完结(续订）
+            </button>
+        </radio-button>
+    </div>
+
+    <div ng-show="orderList_empty">
+        <img src="img/orderList-detail/empty.png" style="zoom: 0.8;margin: 10%;margin-left: 40%;">
+
+        <div class="text-center" style="margin-bottom: 10%;font-size: 12px">—— 目前没有{{orderTyleSelected}}订单 ——</div>
+
+        <div class="row">
+            <div class="col"></div>
+            <button class="col button gotoShoppingBtn" ui-sref="homePage" style="font-size: 12px">去逛逛</button>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <div ng-show="noSend" class="list">
+
+        <label class="item" ng-repeat="orderInfo in orderInfos"
+               style="width: 98%;border-color: #ffffff;margin-left: 3px;margin-top: 10px" ng-click="gotoOrderDetail(orderInfo.orderId,0)">
+            <div class="row" style="font-size: 12px">
+                <strong class="col item-text-wrap">订单编号: {{orderInfo.orderId}}</strong>
+                <strong class="col col-34 item-text-wrap text-right">
+                    金额:<label style="color: orange">￥{{orderInfo.totalPrice/100 | number : 2}}</label>
+                </strong>
+            </div>
+
+            <div class="list" style="margin-left: 10px">
+                <a class="row item item-thumbnail-left item-body"
+                   ng-repeat="prod in orderInfo.detail"
+                   style="border-color: #ffffff; width: 100%;border-top-color: #e9ebe6">
+                    <div class="col">
+                        <img ng-src="{{prod.image}}" style="width: 70px;height: 70px">
+                    </div>
+
+                    <h2 class="col item" style="font-size: 12px; border-color: #ffffff; width: 100%;margin-left: -50px;margin-top: 0px">
+                        <strong>{{prod.prodName}}</strong>
+
+                        <div>日配量: {{prod.quantity}} {{prod.prodUnit}}</div>
+                        <div>配送频率：{{changeDeliverRules(prod.deliverRules)}}</div>
+                        <div>总量：{{prod.deliverDays}} {{prod.prodUnit}}</div>
+                        <div>
+                            配送起止日期：{{prod.beginDate}}--{{prod.endDate}}
+                        </div>
+                    </h2>
+                </a>
+            </div>
+        </label>
+    </div>
+
+    <div ng-show="sending" class="list" id="sending">
+
+        <label class="item" ng-repeat="orderInfo in orderInfos"
+               style="width: 98%;border-color: #ffffff;margin-left: 3px;margin-top: 10px" ng-click="gotoOrderDetail(orderInfo.orderId,1)">
+            <div class="row" style="font-size: 12px">
+                <strong class="col item-text-wrap">订单编号: {{orderInfo.orderId}}</strong>
+                <strong class="col col-34 item-text-wrap text-right">
+                    金额:<label style="color: #ff7e00">￥{{orderInfo.totalPrice/100 | number : 2}}</label>
+                </strong>
+            </div>
+
+            <div class="list" style="margin-left: 10px">
+                <a class="row item item-thumbnail-left item-body"
+                   ng-repeat="prod in orderInfo.detail"
+                   style="border-color: #ffffff; width: 100%;border-top-color: #e9ebe6">
+                    <!--style="border-color: #ffffff; width: 100%;border-top-color: lightgray;">-->
+                    <div class="col">
+                        <img ng-src="{{prod.image}}" style="width: 70px;height: 70px">
+                    </div>
+
+                    <!--<h2 class="col" style="margin-left: -80px;margin-top: 0px;font-size: 15px">-->
+                    <h2 class="col item" style="font-size: 12px; border-color: #ffffff; width: 100%;margin-top: 0px;margin-left: -50px;">
+
+                        <strong>{{prod.prodName}}</strong>
+
+                        <div>日配量: {{prod.quantity}} {{prod.prodUnit}}</div>
+                        <div>配送频率：{{changeDeliverRules(prod.deliverRules)}}</div>
+                        <div>余量：{{prod.stopDate ? prod.deliverDays*prod.quantity: getRemainMilkCount(prod.info)}}
+                            {{prod.prodUnit}}
+                        </div>
+                        <div>状态: ({{prod.stopDate}} || {{prod.info}}) ? {{judgeStateBase(prod.stopDate,
+                            (getRemainMilkCount(prod.info)))}} : {{}};
+                        </div>
+                        <div>
+                            配送起止日期：{{prod.beginDate}}--{{prod.endDate}}
+                        </div>
+                    </h2>
+                </a>
+            </div>
+        </label>
+    </div>
+
+    <div ng-show="finish" class="list">
+
+        <label class="item" ng-repeat="orderInfo in orderInfos"
+               style="width: 98%;border-color: #ffffff;margin-left: 3px;margin-top: 10px"  ng-click="gotoOrderDetail(orderInfo.orderId,1)">
+            <div class="row" style="font-size: 12px">
+                <strong class="col item-text-wrap">订单编号: {{orderInfo.orderId}}</strong>
+                <strong class="col col-34 item-text-wrap text-right">
+                    金额:<label style="color: #ff7e00">￥{{orderInfo.totalPrice/100 | number : 2}}</label>
+                </strong>
+            </div>
+
+            <div class="list" style="margin-left: 10px">
+                <a class="row item item-thumbnail-left item-body"
+                   ng-repeat="prod in orderInfo.detail"
+                   style="border-color: #ffffff; width: 100%;border-top-color: #e9ebe6">
+                    <!--style="border-color: #ffffff; width: 100%;border-top-color: lightgray;">-->
+                    <div class="col">
+                        <img ng-src="{{prod.image}}" style="width: 70px;height: 70px">
+                    </div>
+
+                    <!--<h2 class="col" style="margin-left: -80px;margin-top: 0px;font-size: 15px">-->
+                    <h2 class="col item" style="font-size: 12px; border-color: #ffffff; width: 100%;margin-top: 0px;margin-left: -50px;">
+
+                        <strong>{{prod.prodName}}</strong>
+
+                        <div>余量：{{getRemainMilkCount(prod.info)}} {{prod.prodUnit}}</div>
+                        <div>
+                            配送起止日期：{{prod.beginDate}}--{{prod.endDate}}
+                        </div>
+                    </h2>
+                </a>
+            </div>
+        </label>
+    </div>
+
+</ion-content>
+
+
+
+<!--<div ng-show="sending" class="item list" ng-repeat="orderInfo in orderInfos">-->
+<!--<div type="radio " class="row">-->
+<!--<input class="col col-10" type="radio" value="0" name="chickenEgg2" ng-model="formData.chickenEgg2"-->
+<!--style="position:absolute; top:50%;left:5%;transform:translate( -50%, -50%);"-->
+<!--ng-click="selectedOrderId(orderInfo.orderId)">-->
+
+<!--<label class="col col-offset-10" ng-click="gotoOrderDetail(orderInfo.orderId,0)">-->
+<!--<div class="row">-->
+<!--<strong class="col item-text-wrap">订单编号: {{orderInfo.orderId}}</strong>-->
+<!--<strong class="col col-33">-->
+<!--金额:￥{{sendingMoney}}-->
+<!--</strong>-->
+<!--</div>-->
+
+<!--<div ng-repeat="prod in orderInfo.detail">-->
+<!--<div class="row ">-->
+<!--<strong class="col col-34 item-text-wrap">{{prod.prodName}}</strong>-->
+
+<!--<div class="col">余量：{{getRemainMilkCount(prod.info,prod.info.length)}}</div>-->
+<!--<div class="col">状态: {{judgeStateBase(prod.stopDate,-->
+<!--(getRemainMilkCount(prod.info,prod.info.length)))}}-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="row ">-->
+<!--<div class="col">每次配送数量: {{prod.quantity}}</div>-->
+<!--<div class="col text-right">配送频率：{{changeDeliverRules(prod.deliverRules)}}</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--<div>配送起止日期：{{prod.beginDate}}~{{prod.endDate}}</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--<div ng-show="sending" class="item list" ng-repeat="orderInfo in orderInfos">-->
+<!---->
+<!--<label ng-click="gotoOrderDetail(orderInfo.orderId,0)">-->
+<!--<div class="row">-->
+<!--<strong class="col item-text-wrap">订单编号: {{orderInfo.orderId}}</strong>-->
+<!--<strong class="col col-33">-->
+<!--金额:￥{{sendingMoney}}-->
+<!--</strong>-->
+<!--</div>-->
+
+<!--<div class="list">-->
+
+<!--<a class="row item item-thumbnail-left item-body list-inset"-->
+<!--ng-repeat="prod in orderInfo.detail"-->
+<!--style="width: 95%;border-color: #ffffff">-->
+<!--<div class="col">-->
+<!--<img src="../../img/sn2.jpg" style="width: 80px;height: 80px">-->
+<!--</div>-->
+
+<!--<h2 class="col" style="margin-left: -80px;margin-top: 0px;font-size: 10px">-->
+<!--<strong>{{prod.prodName}}</strong>-->
+
+<!--<div>-->
+<!--配送起止日期：{{prod.beginDate}}~{{prod.endDate}}-->
+<!--</div>-->
+<!--<div>日配量: {{prod.quantity}}</div>-->
+<!--<div>配送频率：{{changeDeliverRules(prod.deliverRules)}}</div>-->
+<!--<div>余量：{{getRemainMilkCount(prod.info,prod.info.length)}}</div>-->
+<!--<div>状态: {{judgeStateBase(prod.stopDate,-->
+<!--(getRemainMilkCount(prod.info,prod.info.length)))}}-->
+<!--</div>-->
+<!--</h2>-->
+<!--</a>-->
+<!--</div>-->
+
+<!--</label>-->
+<!--</div>-->
+
+<!--<div ng-show="finish" class="item list" ng-repeat="orderInfo in orderInfos">-->
+<!--<div type="radio " class="row">-->
+<!--<input class="col col-10" type="radio" value="0" name="chickenEgg3" ng-model="formData.chickenEgg3"-->
+<!--style="position:absolute; top:50%;left:5%;transform:translate( -50%, -50%);"-->
+<!--ng-click="selectedOrderId(orderInfo.orderId)">-->
+
+<!--<label class="col col-offset-10" ng-click="gotoOrderDetail(orderInfo.orderId,2)">-->
+<!--<div class="row">-->
+
+<!--<strong class="col item-text-wrap">订单编号: {{orderInfo.orderId}}</strong>-->
+<!--<strong class="col col-33">-->
+<!--金额:￥{{finishMoney}}-->
+<!--</strong>-->
+<!--</div>-->
+
+<!--<div ng-repeat="prod in orderInfo.detail">-->
+<!--<div class="row ">-->
+<!--<strong class="col item-text-wrap">{{prod.prodName}}</strong>-->
+
+<!--<div class="col col-25">余量：{{getRemainMilkCount(prod.info,prod.info.length)}}</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--<div>配送起止日期：{{prod.beginDate}}~{{prod.endDate}}</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</label>-->
+<!--</div>-->
+<!--</div>-->

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <h1 class="title title-center">购物车</h1>
+    <menu-button></menu-button>
+</ion-header-bar>
+
+<ion-content ng-controller="milkListCtrl" class="has-footer">
+    <ion-refresher
+            pulling-text="下拉刷新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list class="list">
+
+        <div class="card" ng-hide="emptyCar">
+            <!--discount div-->
+            <div class="item item-text-wrap row " style="padding: 16px;">
+                <div class="col-30"><strong>优惠活动：</strong></div>
+                <div class="col-70">
+                    <select ng-model="selDiscount" ng-change="selectGift()">
+                        <option value="0">-请选择优惠活动-</option>
+                        <option ng-if="discountList.length > 0" ng-repeat="discount in discountList" value="{{discount}}">
+                            {{discount.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!--discount milk div-->
+            <div  class="item no-padding" ng-show="isGiftMilkDivShow">
+                <ion-item class="item item-thumbnail-left">
+
+                    <img src="">
+
+                    <h2><a style="text-decoration:none;">{{$parent.disProdMilkList.name}}</a></h2>
+                    <div class="row row-no-padding">
+                        <label class="col col-33" style="margin-top: 5%;">日配量:</label>
+                        <div class="col col-67">
+                            <div class="row">
+                                <button class="button button-small ion-minus-round button-minus col"
+                                        ng-click="$parent.disProdMilkList.quantity<=1?1:$parent.disProdMilkList.quantity=$parent.disProdMilkList.quantity-1"
+                                        style="margin-left: -10px; height: 35px">
+                                </button>
+                                <input type="number" class="col" style="background: lightgrey;text-align: center;height: 35px;padding:5px;"
+                                       ng-model="$parent.disProdMilkList.quantity" ng-init="$parent.disProdMilkList.quantity=1" ng-change="setDiscountEndDate()"/>
+                                <button class="button button-small ion-plus-round button-plus col" style="height: 35px"
+                                        ng-click="$parent.disProdMilkList.quantity=$parent.disProdMilkList.quantity+1">
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h3 style="color: red">价格:￥0元</h3>
+
+                    <ion-option-button class="button-assertive" ng-click="">删除
+                    </ion-option-button>
+                </ion-item>
+                <!--discount milk setting-->
+                <div class="item row-no-padding bg-grey" ng-show="isGiftMilkSetShow">
+                    <ul class="list bg-grey">
+                        <div class="item bg-grey">
+                            <label>配送频率：</label>
+                            <radio-button ng-model="disProdMilkList.deliverRules" ng-change="setDiscountEndDate()">
+                                <button class="button button-small monthButton"
+                                        value="EVERDAY">天天送
+                                </button>
+                                <button class="button button-small monthButton"
+                                        value="NEXTDAY">隔天送
+                                </button>
+                                <button class="button button-small monthButton"
+                                        value="WORKDAY">工作日送
+                                </button>
+                                <button class="button button-small monthButton"
+                                        value="RESTDAY">周末送
+                                </button>
+                            </radio-button>
+                        </div>
+
+                        <label class="item item-input bg-grey ">
+                            <span class="input-label">赠送总量：</span>
+                            <span>{{disProdMilkList.totalQuantity}} {{disProdMilkList.unit}}</span>
+                        </label>
+                        <label class="item item-input bg-grey">
+                            <span class="input-label">开始时间：</span>
+                            <input type="date" ng-model="disProdMilkList.beginDate" ng-change="setDiscountEndDate()">
+                        </label>
+                        <label class="item item-input bg-grey">
+                            <span class="input-label">结束时间：</span>
+                            {{disProdMilkList.endDate |date : 'yyyy-MM-dd'}}
+                        </label>
+                        <label class="item item-input bg-grey padding-5">
+                            <button class="button button-block button-kn-light" ng-click="saveGiftMilk()">保存</button>
+                        </label>
+                    </ul>
+                </div>
+                <!--discount milk saved div-->
+                <div class="item bg-grey" ng-hide="isGiftMilkSetShow">
+
+                    <p>赠送总量：{{disProdMilkList.totalQuantity}} {{disProdMilkList.unit}}</p>
+
+                    <p> 配送周期：
+                        <select disabled ng-model="disProdMilkList.deliverRules">
+                            <option value="EVERDAY">天天送</option>
+                            <option value="NEXTDAY">隔天送</option>
+                            <option value="WORKDAY">工作日送</option>
+                            <option value="RESTDAY">周末送</option>
+                        </select>
+                    </p>
+
+                    <p>开始时间：{{disProdMilkList.beginDate |date : 'yyyy-MM-dd'}}</p>
+
+                    <p>结束时间：{{disProdMilkList.endDate |date : 'yyyy-MM-dd'}}</p>
+                    <label class="item item-input bg-grey padding-5">
+                        <button class="button button-block button-kn-light" ng-click="showEditGiftMilk()">编辑</button>
+                    </label>
+                </div>
+            </div>
+            <!--discount real product div-->
+            <div class="item no-padding" ng-show="isGiftDivShow">
+                <ion-item class="item item-thumbnail-left">
+
+                    <img src="">
+
+                    <h2><a style="text-decoration:none;">{{disGiftList.name}}</a></h2>
+
+                    <p>数量:{{disGiftList.number}}</p>
+
+                    <h3 style="color: red">价格:￥0元</h3>
+                </ion-item>
+            </div>
+        </div>
+
+
+
+        <!--milk product setting alone div-->
+        <div class="card" ng-if="milkInfos_alone.length > 0" ng-repeat="milks in milkInfos_alone">
+            <div class="item item-divider">
+                单独配送：
+            </div>
+            <ion-item class="item item-thumbnail-left" style="padding-right: 0px;">
+
+                <img ng-src="{{milks.image}}">
+
+                <h2>
+                    <a ui-sref="home({{milks.prodId}})" style="text-decoration:none;"><strong>{{milks.prodName}}</strong></a>
+                </h2>
+
+                <div>
+                    <lable>单价:￥{{milks.price/100|number:2}}元</lable>
+                </div>
+
+                <div>
+                    <label style="color: red">合计:￥{{milks.quantity*milks.price*milks.deliverDays/100 | number:2}} 元</label>
+                </div>
+
+                <div class="row row-no-padding">
+                    <label class="col col-33" style="margin-top: 5%;">日配量:</label>
+
+                    <div class="col col-67">
+                        <div class="row">
+                            <button class="button button-small ion-minus-round button-minus col" style="height: 35px"
+                                    ng-click="milks.quantity<=1?1:milks.quantity=milks.quantity-1"
+                                    style="margin-left: -10px">
+                            </button>
+                            <input type="number" class="col" style="background: lightgrey;text-align: center;height: 35px;padding:5px;"
+                                   ng-model="milks.quantity" ng-init="milks.quantity=1" disabled/>
+                            <button class="button button-small ion-plus-round button-plus col" style="height: 35px"
+                                    ng-click="milks.quantity=milks.quantity+1">
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <ion-option-button class="button-positive">取消</ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deleteProd('{{milks.prodId}}','alone')">删除
+                </ion-option-button>
+            </ion-item>
+
+            <!--setting alone div-->
+            <div class="item row-no-padding bg-grey" ng-show="aloneSetting[$index]">
+                <ul class="list bg-grey">
+                    <div class="item bg-grey" style="vertical-align: middle">
+                        <label >配送频率：</label>
+                        <radio-button ng-model="milks.deliverRules">
+                            <button class="button button-small monthButton"
+                                    value="EVERDAY">天天送
+                            </button>
+                            <button class="button button-small monthButton"
+                                    value="NEXTDAY">隔天送
+                            </button>
+                            <button class="button button-small monthButton"
+                                    value="WORKDAY">工作日送
+                            </button>
+                            <button class="button button-small monthButton"
+                                    value="RESTDAY">周末送
+                            </button>
+                        </radio-button>
+
+                        <!--<select ng-model="milks.deliverRules">-->
+                            <!--<option value="EVERDAY">天天送</option>-->
+                            <!--<option value="NEXTDAY">隔天送</option>-->
+                            <!--<option value="WORKDAY">工作日送</option>-->
+                            <!--<option value="RESTDAY">周末送</option>-->
+                        <!--</select>-->
+                    </div>
+
+                    <div class="item bg-grey">
+                        <label>配送时长：</label>
+                        <radio-button ng-model="allSetting.all_month">
+                            <button class="button button-small monthButton" ng-click="setAloneEndDate($index,1)"
+                                    value="1">一个月
+                            </button>
+                            <button class="button button-small monthButton" ng-click="setAloneEndDate($index,3)"
+                                    value="3">三个月
+                            </button>
+                            <button class="button button-small monthButton" ng-click="setAloneEndDate($index,6)"
+                                    value="6">半年
+                            </button>
+                            <button class="button button-small monthButton" ng-click="setAloneEndDate($index,12)"
+                                    value="12">一年
+                            </button>
+                        </radio-button>
+                    </div>
+                    <label class="item item-input bg-grey">
+                        <span class="input-label">开始时间：</span>
+                        <input type="date" ng-model="milks.beginDate">
+                    </label>
+                    <label class="item item-input bg-grey">
+                        <span class="input-label">结束时间：</span>
+                        <input type="date" ng-model="milks.endDate">
+                    </label>
+
+                    <label class="item item-input bg-grey padding-5">
+                        <button class="button button-block button-kn-light" ng-click="saveAloneSetting($index)">保存
+                        </button>
+                    </label>
+
+                </ul>
+            </div>
+            <!--alone set saved div-->
+            <div class="item row-no-padding bg-grey" ng-hide="aloneSetting[$index]">
+
+                <div class="padding-15">
+                    <p>配送时长：{{milks.deliverDays}}</p>
+
+                    <p> 配送频率：
+                        <select ng-model="milks.deliverRules" disabled>
+                            <option value="EVERDAY">天天送</option>
+                            <option value="NEXTDAY">隔天送</option>
+                            <option value="WORKDAY">工作日送</option>
+                            <option value="RESTDAY">周末送</option>
+                        </select>
+                    </p>
+
+                    <p>开始时间：{{milks.beginDate |date : 'yyyy-MM-dd'}}</p>
+
+                    <p>结束时间：{{milks.endDate |date : 'yyyy-MM-dd'}}</p>
+                </div>
+
+                <label class="item item-input bg-grey padding-5">
+                    <button class="button button-block button-kn-light" ng-click="showEditDiv('alone',$index)">编辑
+                    </button>
+                </label>
+            </div>
+
+        </div>
+
+        <!--union setting milk div-->
+        <div class="card" ng-if="milkInfos.length > 0">
+            <div class="item item-divider">
+                统一配送：
+            </div>
+            <ion-item class="item item-thumbnail-left" ng-repeat="milkInfo in milkInfos">
+
+                <img ng-src="{{milkInfo.image}}">
+                <!--click to detail-->
+                <h2><a ui-sref="home({{milkInfo.prodId}})"
+                       style="text-decoration:none;"><strong>{{milkInfo.prodName}}</strong></a></h2>
+
+                <div>
+                    <label>单价:￥{{milkInfo.price/100|number:2}}元</label>
+                </div>
+
+                <div >
+                    <label style="color: red">合计:￥{{milkInfo.quantity*milkInfo.price*allSetting.all_deliverDays/100 | number:2}}元</label>
+                </div>
+
+                <div class="row row-no-padding">
+                    <label class="col col-33" style="margin-top: 5%;">日配量:</label>
+
+                    <div class="col col-67">
+                        <div class="row">
+                            <button class="button button-small ion-minus-round button-minus col"
+                                    ng-click="milkInfo.quantity<=1?1:milkInfo.quantity=milkInfo.quantity-1"
+                                    style="margin-left: -10px">
+                            </button>
+                            <input type="number" class="col" style="background: lightgrey;text-align: center;height: 35px;padding:5px;"
+                                   ng-model="milkInfo.quantity" ng-init="milkInfo.quantity=1" disabled/>
+                            <button class="button button-small ion-plus-round button-plus col"
+                                    ng-click="milkInfo.quantity=milkInfo.quantity+1">
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <ion-option-button class="button-positive" ng-click="editeMilk('{{milkInfo.prodId}}')">设置
+                </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="deleteProd('{{milkInfo.prodId}}','union')">删除
+                </ion-option-button>
+            </ion-item>
+
+            <!--union setting-->
+            <div class="item row-no-padding bg-grey" ng-show="allSetting.flag">
+                <ul class="list bg-grey">
+                    <div class="item bg-grey" style="vertical-align: middle">
+                        <label>配送频率：</label>
+                        <radio-button ng-model="allSetting.all_deliverRules">
+                            <button class="button button-small monthButton" value="EVERDAY">天天送
+                            </button>
+                            <button class="button button-small monthButton" value="NEXTDAY">隔天送
+                            </button>
+                            <button class="button button-small monthButton" value="WORKDAY">工作日送
+                            </button>
+                            <button class="button button-small monthButton" value="RESTDAY">周末送
+                            </button>
+                        </radio-button>
+                    </div>
+
+                    <div class="item bg-grey " style="vertical-align: middle">
+                        <label>配送时长：</label>
+                        <radio-button ng-model="allSetting.all_month">
+                            <button class="button button-small monthButton" ng-click="setAllEndDate(1)" value="1">一个月
+                            </button>
+                            <button class="button button-small monthButton" ng-click="setAllEndDate(3)" value="3">三个月
+                            </button>
+                            <button class="button button-small monthButton" ng-click="setAllEndDate(6)" value="6">半年
+                            </button>
+                            <button class="button button-small monthButton" ng-click="setAllEndDate(12)" value="12">一年
+                            </button>
+                        </radio-button>
+                    </div>
+                    <label class="item item-input bg-grey">
+                        <span class="input-label">开始时间：</span>
+                        <input type="date" ng-model="allSetting.all_beginDate">
+                    </label>
+                    <label class="item item-input bg-grey">
+                        <span class="input-label">结束时间：</span>
+                        <input type="date" ng-model="allSetting.all_endDate">
+
+                    </label>
+                    <label class="item item-input bg-grey padding-5">
+                        <button class="button button-block button-kn-light" ng-click="saveAllSetting()">保存</button>
+                    </label>
+                </ul>
+            </div>
+            <!--save union setting div-->
+            <div class="item row-no-padding bg-grey" ng-hide="allSetting.flag">
+
+                <div class="padding-15">
+                    <p>配送天数：{{allSetting.all_deliverDays}}</p>
+
+                    <p> 配送周期：
+                        <select ng-model="allSetting.all_deliverRules" disabled>
+                            <option value="EVERDAY">天天送</option>
+                            <option value="NEXTDAY">隔天送</option>
+                            <option value="WORKDAY">工作日送</option>
+                            <option value="RESTDAY">周末送</option>
+                        </select>
+                    </p>
+
+                    <p>开始时间：{{allSetting.all_beginDate |date : 'yyyy-MM-dd'}}</p>
+
+                    <p>结束时间：{{allSetting.all_endDate | date : 'yyyy-MM-dd'}}</p>
+                </div>
+                <label class="item item-input bg-grey padding-5">
+                    <button class="button button-block button-kn-light" ng-click="showEditDiv('union',0)">编辑</button>
+                </label>
+            </div>
+
+        </div>
+
+        <!--empty shopping car div-->
+        <div class="text-center"  ng-show="emptyCar" style="margin-top: 20%">
+            <div class="text-center"><img src="img/empty.png"></div>
+            <div class="text-center" style="margin: 15%">
+                <div class="text-center item-text-wrap">客官,您的购物车空空如也,去添加点东西吧!</div>
+            </div>
+            <div class="text-center"><button class="button button-stable button-kangnuo" style="border-radius: 30px;" ui-sref="homePage"><label style="color: white">立刻添加</label></button></div>
+        </div>
+
+    </ion-list>
+
+</ion-content>
+
+<ion-footer-bar ng-controller="buyCarFootCtrl">
+    <div class="bar bar-footer bar-stable">
+        <strong class="col-50 " style="color: red;margin:2%">总计：￥{{shoppingCarShow.totalPrice/100|number:2}}元</strong>
+        <button class="button button-kangnuo col-offset-20 col-25" ng-click="gotoConfirm()">
+            结算
+        </button>
+    </div>
+</ion-footer-bar>

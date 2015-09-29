@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<ion-header-bar>
+    <button class="button ion-arrow-left-c button-icon" back-button></button>
+    <h1 class="title">订单支付</h1>
+    <button class="button button-icon icon ion-navicon "></button>
+</ion-header-bar>
+
+<ion-content ng-controller="orderPayCtrl">
+    <div class="card no-margin-lr row">
+        <div class="col col-25 ">
+            <div style="margin:10%">送至:</div>
+        </div>
+        <div class="col col-75 item-text-wrap">
+            <p>配送地址是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么是什么</p>
+        </div>
+    </div>
+    <div class="card no-margin-lr">
+        <ion-item class="item item-thumbnail-left" ng-repeat="milkInfo in milkInfos">
+            <img src="{{milkInfo.img}}">
+            <!--点击跳转到产品详情-->
+            <h2>
+                <a ui-sref="home({{milkInfo.prodId}})" style="text-decoration:none;">{{milkInfo.prodName}}</a>
+            </h2>
+
+            <p>单价:￥{{milkInfo.price}}元</p>
+
+            <p>总数量: {{milkInfo.number}}</p>
+
+            <p>日配数量: {{milkInfo.quantity}}</p>
+
+            <p>始配日期: 2015-06-18</p>
+
+            <p>配送频率: {{milkInfo.deliverRules}}</p>
+
+            <p>配送时长: {{milkInfo.deliverDays}}</p>
+
+            <h3 style="color: red">价格:{{milkInfo.quantity*milkInfo.price}} 元</h3></p>
+        </ion-item>
+
+    </div>
+
+</ion-content>

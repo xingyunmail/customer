@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<ion-header-bar class="bar-kangnuo">
+    <!--<div style="margin-top: 10px;font-size: 18px;color: #ff7e00">康诺食品</div>-->
+    <button class="button button-icon">
+        <img src="img/homePage/kangnuo.png" width="69px" height="16px" style="margin-top: 9px">
+    </button>
+
+    <div class="h1 title text-center" ng-click="setCityLoc()" style="text-align: center">
+        <!--<div ng-click="setCityLoc()" style="margin-left: 20%;margin-top: 0px">-->
+        <!--<img src="img/homePage/cityBg.png" width="44px" height="16px" >-->
+        <span class="myLoc_city">
+            <label ng-model="myLoc_city" style="color: #ffffff;font-size: 10px">
+                {{myLoc_city}}
+            </label>
+        </span>
+
+        <!--<a class="button button-icon icon">-->
+        <img src="img/homePage/cityLoc.png" width="10px" height="15px" style="margin-top: 18px;margin-left: 4px"/>
+        <!--</a>-->
+    </div>
+    <!--<menu-button></menu-button>-->
+
+    <div class="col" style="margin-left: 50%">
+
+        <a class="button button-icon icon" style="margin: 0%;padding: -8%; margin-left: 40%;margin-top: 0px"
+           ng-click="openHeadRightList()">
+            <img src="img/homePage/navList.png" width="15.5px" height="18.5px"
+                 style="margin: 0%;padding: 0%; margin-left: 72%;margin-top: 5px"/>
+        </a>
+
+        <div style="margin-top: 0%;font-size: 10px;" id="navList" ng-show="headRightList">
+            <button class="button navListBtn" ui-sref="homePage">
+                首页
+            </button>
+            <button class="button navListBtn" ui-sref="shoppingcar">
+                购物车
+                <!--购物车<label style="color: red;font-size: 15px; width: 15%">{{shoppingCarCount}}</label>-->
+            </button>
+            <button class="button navListBtn" ui-sref="customer">
+                我的
+            </button>
+            <button class="button navListBtn" ng-show="loginAndRegis"
+                    ui-sref="login">
+                登录/注册
+            </button>
+        </div>
+    </div>
+
+</ion-header-bar>
+
+<ion-content ng-click="closeHeadRightList()" style="background: #e9ebe6">
+
+    <ion-refresher
+            pulling-text="下拉刷新..."
+            on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div id="idContainer" style="margin-top: 3px;margin-left: 6px;margin-right: 6px" class="container">
+        <table id="idSlider" border="0" cellpadding="0" cellspacing="0" width="300%">
+            <td ng-repeat="milkAd in milkAds">
+
+                <img ng-src="{{milkAd.img}}" width="100%" height="155px" ng-click="gotoProductdetail(milkAd)"
+                     id="adImage">
+
+                <div class="row adGrayBackground">
+                    <label style="margin-left: 20px;color: #ff7e00">康诺</label>
+                    <label style="margin-left: 20px;color: #f0f0f0;margin: 0">.{{milkAd.prodName}}</label>
+
+                    <label style="margin-left: 20px;color: #ff7e00">{{milkAd.price/100 | number :
+                        2}}元/{{milkAd.unit}}</label>
+                </div>
+            </td>
+        </table>
+    </div>
+
+    <div class="list" style="margin-top: 0px;">
+        <!--<a class="row item item-thumbnail-left item-body list-inset" ng-repeat="prod in milkInfos"-->
+
+        <a class="row item item-thumbnail-left homeCell"
+           ng-repeat="prod in milkInfos"
+           style="width: 96.5%;border-color: #ffffff;margin-left: 6px;margin-top: 7px;">
+
+            <div class="col" style="margin-top: 5px;margin-left: 40px" ng-click="gotoProductdetail(prod)">
+                <!--<img src="img/sn3.jpg" style="width: 70px;height: 70px">-->
+                <img ng-src="{{prod.icon}}" style="width: 70px;height: 70px">
+
+                <div>
+                    <div style="color: #ff4800;margin-left: 5px;margin-top: -2px;font-size: 10px">￥{{prod.price/100 |
+                        number:2}}元/{{prod.unit}}
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="col" style="margin-top: 10px;margin-left: -40px">
+                <div class="row" ng-click="gotoProductdetail(prod)"
+                     style="font-size: 12px;color: #156d01">清新肠道，从今天开始
+                </div>
+                <strong class="row" ng-click="gotoProductdetail(prod)"
+                        style="font-size: 10px;color: #156d01;margin-top: 3px">{{prod.name}}</strong>
+
+                <div>
+                    <img src="img/homePage/shopCarAddBtn.png" ng-click="addShoppintcar(prod)"
+                         style="width: 45px; height: 43px;padding: 12px">
+                    <!--加一个10px的padding便于按钮被点击到-->
+                    <img src="img/homePage/buySoonBtn.png" ng-click="setBuySoonInfo(prod)"
+                         style="margin-left: 20px;width: 46px; height: 46px;padding: 12px">
+                </div>
+            </h2>
+        </a>
+    </div>
+
+</ion-content>
+
+<div id="box">
+    <button ui-sref="shoppingcar">
+        <div class="row" ng-show="home_shopCar_Badge">
+            <label class="shopCarBadge" ng-model="shoppingCarCount">
+                {{shoppingCarCount}}
+            </label>
+        </div>
+
+        <div ng-show="home_shopCar_Badge_0" class="shopCarBadge_0">
+        </div>
+
+
+        <img class="row" src="img/homePage/shopCar.png"
+             style="width: 39px;height: 36px;margin-top: -20px;margin-left: 35px">
+
+        <label class="row" style="margin-left: 22px;font-size: 10px;margin-top: 5px">
+            购物车
+        </label>
+
+    </button>
+</div>
+
+
+<div ng-show="cityLoc" class="cityLoc">
+    <radio-button class="row" ng-model="citySelected" ng-change="setMyCity()" id="moreCity">
+
+        <button class="col button button-small cityLocButton" value="邯郸"
+                style="height: 16px;vertical-align: middle;padding-top: 2px">
+            邯郸
+        </button>
+        <button class="col button button-small cityLocButton" value="安阳"
+                style="height: 16px;vertical-align: middle;padding-top: 2px">
+            安阳
+        </button>
+        <button class="col button button-small cityLocButton" value="武安"
+                style="height: 16px;vertical-align: middle;padding-top: 2px">
+            武安
+        </button>
+        <button class="col button button-small cityLocButton" value="邢台"
+                style="height: 16px;vertical-align: middle;padding-top: 2px">
+            邢台
+        </button>
+    </radio-button>
+</div>
+
+<!--<ion-content ng-click="closeHeadRightList()" style=" background: whitesmoke;">-->
+
+<!--<ion-refresher-->
+<!--pulling-text="下拉刷新..."-->
+<!--on-refresh="doRefresh()">-->
+<!--</ion-refresher>-->
+
+<!--<div ng-show="cityLoc">-->
+<!--<radio-button class="row" ng-model="$parent.citySelected" ng-change="setMyCity()">-->
+
+<!--<button class="col button button-small cityLocButton" value="邯郸">-->
+<!--邯郸-->
+<!--</button>-->
+<!--<button class="col button button-small cityLocButton" value="安阳">-->
+<!--安阳-->
+<!--</button>-->
+<!--<button class="col button button-small cityLocButton" value="武安">-->
+<!--武安-->
+<!--</button>-->
+<!--<button class="col button button-small cityLocButton" value="邢台">-->
+<!--邢台-->
+<!--</button>-->
+<!--</radio-button>-->
+<!--</div>-->
+
+<!--<div class="container" id="idContainer" style="margin-top: 10px">-->
+<!--<table id="idSlider" border="0" cellpadding="0" cellspacing="0" width="300%">-->
+<!--<td ng-repeat="milkAd in milkAds">-->
+<!--<img src="{{milkAd.img}}" width="100%" ng-click="gotoProductdetail(milkAd)">-->
+<!--</td>-->
+<!--</table>-->
+<!--</div>-->
+
+<!--<div class="list" style="margin-top: -10px;">-->
+<!--<a class="row item item-thumbnail-left item-body list-inset" ng-repeat="prod in milkInfos"-->
+<!--style="width: 95%;border-color: #ffffff;">-->
+
+<!--<div class="col" style="margin-top: 20px; margin-left: -20px">-->
+<!--<img src="{{prod.icon}}" style="width: 80px;height: 80px;margin-left: 50px"-->
+<!--ng-click="gotoProductdetail(prod)">-->
+
+<!--<div style="margin-left: 70px;margin-top: -5px">-->
+<!--<div style="color: red;margin-left: 0px;margin-top: 0px;font-size: 15px">￥{{prod.price/100 |-->
+<!--number:2}}-->
+<!--</div>-->
+
+<!--</div>-->
+
+<!--</div>-->
+
+<!--<h2 class="col">-->
+<!--<strong ng-click="gotoProductdetail(prod)">{{prod.name}}</strong>-->
+
+<!--<p>-->
+<!--<img src="img/homePage/shopCarAddBtn.png" ng-click="addShoppintcar(prod)">-->
+
+<!--<img src="img/homePage/buySoonBtn.png" ng-click="setBuySoonInfo(prod)"-->
+<!--style="margin-left: 20px">-->
+<!--</p>-->
+<!--</h2>-->
+<!--</a>-->
+<!--</div>-->
+
+<!--</ion-content>-->
+
+<!--<div id="box">-->
+<!--<button ui-sref="shoppingcar">-->
+<!--<div class="row" ng-show="home_shopCar_Badge">-->
+<!--<label class="shopCarBadge" ng-model="shoppingCarCount">-->
+<!--{{shoppingCarCount}}-->
+<!--</label>-->
+<!--</div>-->
+
+<!--<div ng-show="home_shopCar_Badge_0" class="shopCarBadge_0">-->
+<!--</div>-->
+
+
+<!--<img class="row" src="img/homePage/shopCar.png"-->
+<!--style="width: 55px;height: 55px;margin-left: 25px;margin-top: -20px">-->
+
+<!--<label class="row" style="margin-left: 20px;font-size: 10px">-->
+<!--购物车-->
+<!--</label>-->
+
+
+<!--</button>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

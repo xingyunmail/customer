@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button ion-home button-icon" style="color:  #ff7e00" ui-sref="homePage"></button>
+    <h1 class="title">登陆</h1>
+    <button class="button button-icon" style="color:  #ff7e00" ui-sref="register">注册</button>
+</ion-header-bar>
+<!--<style>-->
+<!--.bg{background: url("../../img/alipay.jpeg");}-->
+<!--</style>-->
+<ion-content ng-controller="loginCtrl" class="loginbackground">
+    <div style="text-align: center;margin-top: 20%">
+        <div class="list">
+            <div class="item item-input"
+                   style="margin-top: 10px;margin-right: 8%;margin-left: 8%;height: 45px;border-radius: 6px">
+                <!--<span class="input-label">用户名:</span>-->
+                <div style="width: 45px;margin-left: -6%">
+                    <img src="img/login/person.png"
+                         style="margin-left: -6%;width: 20px;height: 25px;vertical-align: middle">
+                </div>
+                <input type="text" ng-model="userName" placeholder="请输入登陆手机号">
+                <!--<i class="icon ion-close-circled" ng-if="userName" ng-click="cancelText()" style="width: 36px;height: 45px;padding-top: 5%"></i>-->
+
+                <!--<i class="icon ion-close-circled" ng-click="userName=''"  ng-show="userName" style="width: 36px;height: 45px;padding-top: 5%;color: lightgrey"></i>-->
+
+            </div>
+
+
+            <div class="item item-input"
+                   style="margin-top: 5%;margin-right: 8%;margin-left: 8%;height: 45px;border-radius: 6px">
+                <!--<span class="input-label">密码：</span>-->
+                <div style="width: 45px;margin-left: -6%;vertical-align: middle">
+                    <img src="img/login/password.png"
+                         style="margin-left: -6%;width: 20px;height: 25px;vertical-align: middle">
+                </div>
+                <input type="password" ng-model="userPassword" placeholder="请输入密码">
+                <!--<label class="icon ion-close-circled" ng-if="userPassword" ng-click="cancelPassword()" style="width: 36px;height: 45px;padding-top: 5%"></label>-->
+                <!--<i class="icon ion-close-circled"  ng-click="userPassword=''" ng-show="userPassword"  style="width: 36px;height: 45px;padding-top: 5%;color: lightgrey"></i>-->
+
+
+            </div>
+        </div>
+
+        <div style="margin-top: 15%;margin-left: 15%;margin-right: 15%">
+            <button class="button button-block"
+                    style="background:#ff7e00;color: #ffffff;border-radius: 25px;height: 10px;border-color: #ff7e00"
+                    ng-click="login()">登陆
+            </button>
+        </div>
+
+    </div>
+
+</ion-content>
+
+
+
+

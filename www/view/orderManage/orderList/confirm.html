@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo">
+    <button class="button button-icon back-button-icon" back-button></button>
+
+    <div class="h1  title" style="text-align: center; color: #000000; margin-top: 5px">更换品种</div>
+
+    <menu-button></menu-button>
+</ion-header-bar>
+
+
+<ion-content>
+
+    <div class="item" style="line-height: 10px">
+        已购奶品，统一安排配送
+    </div>
+
+    <div class="list">
+        <a class="item list-borderless" ng-repeat="prod in products">
+            <div class="item-thumbnail-left">
+                <img src="{{prod.image}}">
+
+                <strong class="row" style="margin-top: -15px">{{prod.prodName}}</strong>
+
+                <div class=" row">
+                    <div class="col" style="font-size: 14px">
+                        {{prod.prodType}}
+                    </div>
+                    <div class="col col-offset-10"
+                         style="color: red; margin-left: 5px;margin-right: -15px;font-size: 14px">
+                        ￥{{prod.prodPrice}}
+                    </div>
+                    <div class="col" style="margin-top: -25px">
+                        <img class="row" src="../../img/singleSend.png"
+                             style="width: 37px;height: 25px;margin-left: 10px">
+                        <button class="row button singleSendBtn"
+                                ng-click="selectSingleSend(prod.prodId)">
+                            单独配送
+                        </button>
+                    </div>
+                </div>
+
+
+                <!--<div class="row item item-input">-->
+                <!--<span class="input-label" style="font-size: 13px">每日配送量：</span>-->
+                <!--<button class="button button-small ion-minus-round"-->
+                <!--ng-click="detail.quantity<=1?1:detail.quantity=detail.quantity-1"-->
+                <!--style="margin-left: -10px">-->
+                <!--</button>-->
+                <!--<input type="number" class="col-25" style="background: lightgrey;text-align: center"-->
+                <!--ng-model="detail.quantity" ng-init="detail.quantity=1"/>-->
+                <!--<button class="button button-small ion-plus-round"-->
+                <!--ng-click="detail.quantity=detail.quantity+1">-->
+                <!--</button>-->
+                <!--</div>-->
+
+                <div class="row" style="line-height: 20px">
+
+                    <span class="col col-25">日配送量：</span>
+                    <button class="button button-small ion-minus-round buySoonDecreseBtn"
+                            ng-click="prod.cm_quantity > 1 ? prod.cm_quantity = prod.cm_quantity - 1 : 1">
+                    </button>
+                    <input type="number" class="col-20"
+                           style="background: lightgrey;text-align: center;zoom: 1.2;height: 30px;margin-top: 5px;border-radius: 0px"
+                           ng-model="prod.cm_quantity" ng-init="prod.quantity = 1"/>
+                    <button class="button button-small ion-plus-round buySoonAddBtn"
+                            ng-click="prod.cm_quantity = prod.cm_quantity + 1">
+                    </button>
+                </div>
+
+                <!--<div class="row" style="line-height: 20px">-->
+
+                    <!--<span class="col col-25">日配送量：</span>-->
+                    <!--<button class="button button-small ion-minus-round buySoonDecreseBtn"-->
+                            <!--ng-click="reduceQuantity(prod.prodId)">-->
+                    <!--</button>-->
+                    <!--<input type="number" class="col-20"-->
+                           <!--style="background: lightgrey;text-align: center;zoom: 1.2;height: 30px;margin-top: 5px;border-radius: 0px"-->
+                           <!--ng-model="$parent.cm_quantity"  readonly="readonly"/>-->
+                    <!--<button class="button button-small ion-plus-round buySoonAddBtn"-->
+                            <!--ng-click="addQuantity(prod.prodId)">-->
+                    <!--</button>-->
+                <!--</div>-->
+
+            </div>
+
+            <div ng-show="singleSendInfo" ng-if="prod.prodId == ifSingleSend">
+
+                <div class="row item" style="line-height: 40px">
+                    <span class="col col-25" style="margin-left: 5px">配送频率：</span>
+
+                    <radio-button class="row" ng-model="$parent.single_deliverRule" ng-change="setDeliverRule()">
+
+                        <button class="col button button-small monthButton" value="EVERDAY">
+                            天天送
+                        </button>
+                        <button class="col button button-small monthButton" value="NEXTDAY">
+                            隔天送
+                        </button>
+                        <button class="col button button-small monthButton" value="WORKDAY">
+                            工作日送
+                        </button>
+                        <button class="col button button-small monthButton" value="RESTDAY">
+                            周末送
+                        </button>
+                    </radio-button>
+                </div>
+
+                <div class="row item" style="line-height: 40px">
+                    <span class="col col-25" style="margin-left: 5px">订购时长：</span>
+
+                    <radio-button class="row" ng-model="$parent.single_Month" ng-change="setEndDate()">
+                        <button class="col button button-small monthButton" value="1">
+                            一个月
+                        </button>
+                        <button class="col button button-small monthButton" value="2">
+                            两个月
+                        </button>
+                        <button class="col button button-small monthButton" value="3">
+                            三个月
+                        </button>
+                        <button class="col button button-small monthButton" value="6">
+                            半年
+                        </button>
+                    </radio-button>
+                </div>
+
+
+                <div class="row item" style="line-height: 40px">
+                    <span class="col col-33" style="margin-left: 5px">开始时间：</span>
+                    <input style="border-color: #ff7e00;margin-right: 15%;line-height: 30px;margin-top: 8px" class="col" type="date"
+                           ng-model="$parent.single_beginDate" ng-click="changeBeginDate()">
+                </div>
+
+
+                <div class="row item" style="line-height: 40px">
+                    <span class="col col-33" style="margin-left: 5px">结束时间：</span>
+                    <input style="border-color: #ff7e00;margin-right: 15%;;line-height: 30px;margin-top: 8px" class="col"
+                           type="date"
+                           ng-model="$parent.single_endDate" ng-click="changeEndDate()">
+                </div>
+
+
+                <div class="row item" style="line-height: 40px">
+                    <span class=" col col-33" style="margin-left: 5px">优惠：</span>
+                    <select class="col" style="margin-top: 10px;margin-bottom: 8px;margin-right: 15%;border-color: #ff7e00"
+                            ng-model="$parent.singleInfo"
+                            ng-change="selectActivityType()">
+                        <option value="0">--请选择优惠类型--</option>
+                        <option ng-repeat="activity in activityInfos" value="{{activity}}">
+                            {{activity.description}}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="item item-divider" style="color: red; font-size: 13px">
+        优惠活动：满100元送20袋!
+    </div>
+
+    <div ng-show="uniteSendInfo">
+
+        <div class="row item" style="line-height: 40px">
+            <span class="col col-25" style="margin-left: 5px">配送频率：</span>
+
+            <radio-button class="row" ng-model="$parent.unite_deliverRule" ng-change="setDeliverRule()">
+
+                <button class="col button button-small monthButton" value="EVERDAY">
+                    天天送
+                </button>
+                <button class="col button button-small monthButton" value="NEXTDAY">
+                    隔天送
+                </button>
+                <button class="col button button-small monthButton" value="WORKDAY">
+                    工作日送
+                </button>
+                <button class="col button button-small monthButton" value="RESTDAY">
+                    周末送
+                </button>
+            </radio-button>
+        </div>
+
+        <div class="row item" style="line-height: 40px">
+            <span class="col col-25" style="margin-left: 5px">订购时长：</span>
+
+            <radio-button class="row" ng-model="$parent.unite_Month" ng-change="setUniteEndDate()">
+                <button class="col button button-small monthButton" value="1">
+                    一个月
+                </button>
+                <button class="col button button-small monthButton" value="2">
+                    两个月
+                </button>
+                <button class="col button button-small monthButton" value="3">
+                    三个月
+                </button>
+                <button class="col button button-small monthButton" value="6">
+                    半年
+                </button>
+            </radio-button>
+        </div>
+
+
+        <div class="row item" style="line-height: 40px">
+            <span class="col col-33" style="margin-left: 5px">开始时间：</span>
+            <input style="border-color: #ff7e00;margin-right: 15%;line-height: 30px;margin-top: 8px" class="col"
+                   type="date"
+                   ng-model="$parent.unite_beginDate" ng-click="changeBeginDate()">
+        </div>
+
+
+        <div class="row item" style="line-height: 40px">
+            <span class="col col-33" style="margin-left: 5px">结束时间：</span>
+            <input style="border-color: #ff7e00;margin-right: 15%;;line-height: 30px;margin-top: 8px" class="col"
+                   type="date"
+                   ng-model="$parent.unite_endDate" ng-click="changeEndDate()">
+        </div>
+
+
+        <div class="row item" style="line-height: 40px">
+            <span class=" col col-33" style="margin-left: 5px">优惠：</span>
+            <select class="col" style="margin-top: 10px;margin-bottom: 8px;margin-right: 15%;border-color: #ff7e00"
+                    ng-model="$parent.uniteInfo"
+                    ng-change="selectActivityType()">
+                <option value="0">--请选择优惠类型--</option>
+                <option ng-repeat="activity in activityInfos" value="{{activity}}">
+                    {{activity.description}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+</ion-content>
+
+<ion-footer-bar>
+    <div class="row bar bar-light bar-footer" style="background: #dddcdc">
+        <!--<div class="col">合计：{{totalCount}}袋</div>-->
+        <div class="col col-34" style="color: #525151;font-size: 13px">差额合计：</div>
+        <div class="col" style="color: #ff7e00;font-size: 18px;margin-left: -15px;margin-right: -15px">￥{{cm_totalPrice |
+            number:2}}
+        </div>
+        <button class="col button makesureBuyBtn"
+                style="width: 90px;line-height: 100%;font-size: 15px;margin-left: 15px"
+                ng-click="gotoConfirmOrder()">确认更换
+        </button>
+    </div>
+
+</ion-footer-bar>
+
+

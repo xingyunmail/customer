@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<ion-header-bar class="bar-kangnuo" xmlns="http://www.w3.org/1999/html">
+    <button class="button button-icon back-button-icon" back-button></button>
+    <div class="h1  title text-center" style="text-align: center; color: #000000">订单详情</div>
+</ion-header-bar>
+
+<ion-content style="background: #eaebe6;">
+
+    <div>
+
+        <div class="item" style="font-size: 15px">
+            <img class="orderDetailIcon" src="img/orderList-detail/number.png" width="38px" height="42px">
+
+            <div style="margin-left: 40px">
+                <div class="row item-text-wrap">订单编号：{{orderId}}</div>
+                <div class="row">订单状态：
+                    <div style="color: red">等待付款</div>
+                </div>
+                <div class="row">生成时间：{{orderbegainDate}}</div>
+                <strong class="row">
+                    订单总价：
+                    <div style="color: red">
+                        ￥{{computeMoney/100 | number : 2}}
+                    </div>
+                </strong>
+                <div class="row" style="color: red">活动：{{orderDiscount.name}}</div>
+            </div>
+        </div>
+
+        <div class="item" style="font-size: 15px;margin-top: 3%">
+            <img class="orderDetailIcon" src="img/orderList-detail/address.png" width="30px" height="49px">
+
+            <div style="margin-left: 40px">
+                <div class="row">收货人：{{orderContact.name}}</div>
+                <div class="row">手机号：{{orderContact.phone}}</div>
+                <div class="row item-body" style="width: 100%">收获地址： {{orderContact.address}}
+                </div>
+            </div>
+        </div>
+
+        <div ng-repeat="prod in orderDetail" style="font-size: 14px;margin-top: 3%">
+            <div class="item" style="height: 100px">
+                <img class="orderDetailIcon" src="img/orderList-detail/bottle.png" width="30px" height="49px">
+
+                <!--<img style="margin-left: 40px" src="{{prod.image}}" width="70px" height="70px">-->
+
+                <div style="margin-left: 40px; margin-bottom: 10px">
+                    <div class="row item-body" style="margin-bottom: 10px">名称：{{prod.prodName}}</div>
+                    <div class="row" style="width: 100%">单价：
+                        <div style="color: red">￥{{prod.price/100 | number : 2}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img class="orderDetailIcon" src="img/orderList-detail/smallPeople.png" width="27px"
+                     height="42px">
+
+                <div style="margin-left: 35px;color: gray;font-size: 13px">
+                    <div class="row">
+                        <div class="col text-left">配送天数</div>
+                        <div class="col text-right">{{prod.deliverDays}}天</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-left">每次配送数量</div>
+                        <div class="col text-right">{{prod.quantity}} {{prod.prodUnit}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-left">配送频率</div>
+                        <div class="col text-right">{{changeDeliverRules(prod.deliverRules)}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-left">余量</div>
+                        <div class="col text-right">{{flag == 0 || prod.stopDate ? prod.deliverDays : getRemainMilkCount(prod.info)}} {{prod.prodUnit}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-33 text-left">配送起止时间</div>
+                        <div class="col text-right item-body" style="width: 100%">{{prod.beginDate}}--{{prod.endDate}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="item" style="font-size: 15px;margin-top: 3%">
+
+            <div style="margin-left: 10px">
+                <div class="row item-body" style="width: 100%">备注：请尽快送达！请尽快送达！请尽快送达！请尽快送达！请尽快送达！请尽快送达！
+                </div>
+            </div>
+        </div>
+
+        <div class="item" style="font-size: 15px;margin-top: 3%" ng-show="isHaveGift">
+            <img class="orderDetailIcon" src="img/orderList-detail/gift.png" width="32px" height="37px">
+
+            <div style="margin-left: 40px">
+                <div class="row">赠品：{{orderDiscount.gifts[0].name}}</div>
+                <div class="row item-body" style="width: 100%">数量：{{orderDiscount.gifts[0].number}}
+                    {{orderDiscount.gifts[0].unit}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+
+<ion-footer-bar>
+    <div ng-show="noSendDetail">
+        <div class="row bar" style="background: #dcdcdc;margin: 0;padding: 0;margin-top: -6px">
+            <button class="col button text-center changeMilkMakeSureBtn" style="background: #9a9a9a;margin-left: 12%"
+                    ng-click="cancelOrder()">
+                取消订单
+            </button>
+            <div class="col col-10"></div>
+            <button class="col button text-center changeMilkMakeSureBtn" style="margin-right: 12%"
+                    ng-click="getCharge()">
+                在线支付
+            </button>
+        </div>
+
+        <!--<div style="margin-top: -135px;margin-left: -5px;width: 175%" ng-show="payStyle">-->
+            <!--<strong class="item" style="width: 100%;background: #fefefe;border-top-color: lightgray">-->
+                <!--请选择支付方式 <label style="color: red">在线支付立减5元！</label>-->
+            <!--</strong>-->
+
+            <!--<div class="item" style="width: 100%;background: #eaebe6">-->
+                <!--<div class="radio">-->
+                    <!--<input type="radio" checked="checked">-->
+                    <!--<img src="img/alipay.png" style="zoom: 0.8">-->
+                    <!--支付宝支付-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+
+    <div class="row bar bar-footer"  ng-show="sendingDetail">
+
+        <div class="col text-center">
+            <button class="button button-positive button-block" style="margin: -7%;padding: 0%;"
+            ng-click="changeMilk()">
+            换奶品
+            </button>
+        </div>
+
+        <div class="col text-center">
+            <button ui-sref="changeAddress" class="button button-positive button-block" style="margin: -7%;padding: 0%;"
+                    ng-click="changeAddress()">
+                更换地址
+            </button>
+        </div>
+
+        <div class="col text-center">
+            <button class="button button-positive button-block" style="margin: -7%;padding: 0%;"
+                    ng-click="stopDistribution(orderData)">
+                暂停送奶
+            </button>
+        </div>
+
+        <div class="col text-center">
+            <button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -5px"
+                    ng-click="moreHandle()">
+                更多操作
+            </button>
+            <button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -68px"
+                    ng-click="moreHandle()" ng-show="moreMenu">
+                退订
+            </button>
+            <button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -68px"
+                    ui-sref="changeDailyDelivery" ng-show="moreMenu">
+                更换日配
+            </button>
+            <button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -68px"
+                    ui-sref="activeMilk" ng-show="moreMenu" ng-click="beginSend()">
+                开始配送
+            </button>
+        </div>
+    </div>
+
+    <div class="bar bar-footer " ng-show="finishDetail">
+        <button class="button button-positive button-block" style="margin: 0;padding: 0;" ng-controller="renewOrderCtrl"
+                ng-click="clickRenewButron()">
+            续订
+        </button>
+    </div>
+    
+</ion-footer-bar>
+
+
+<!--<div class="row item">-->
+<!--<button class="col col-33 button button-clear button-dark"-->
+<!--style="font-size: 14px; text-align: left">-->
+<!--支付宝支付-->
+<!--</button>-->
+<!--<button class="col col-33 button button-clear button-dark"-->
+<!--style="font-size: 14px; text-align: left">-->
+<!--微信支付-->
+<!--</button>-->
+<!--<button class="col col-33 button button-clear button-dark"-->
+<!--style="font-size: 14px; text-align: left">-->
+<!--上门收款-->
+<!--</button>-->
+<!--</div>-->
+
+
+<!--<div class="item" ng-repeat="prod in orderDetail" style="font-size: 14px">-->
+<!--<div class="row item-text-wrap">-->
+<!--<strong>名称：{{prod.prodName}}</strong>-->
+<!--</div>-->
+
+<!--<div class="row ">-->
+<!--<div class="col">状态: {{judgeStateBase(prod.stopDate,-->
+<!--(getRemainMilkCount(prod.info,prod.info.length)))}}-->
+<!--</div>-->
+<!--<div class="col">单价:￥{{prod.price}}</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--<div class="col">日配：{{prod.quantity}}</div>-->
+<!--<div class="col">频率：{{changeDeliverRules(prod.deliverRules)}}</div>-->
+<!--<div class="col col-offset-10">时长：{{getInfoLength(prod.info)}}</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--<div class="col">已配送：{{prod.info.length - getRemainMilkCount(prod.info,prod.info.length)}}</div>-->
+<!--<div class="col">余量：{{getRemainMilkCount(prod.info,prod.info.length)}}</div>-->
+
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--开始配送时间：{{prod.beginDate}}-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--结束配送时间：{{prod.endDate}}-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+
+<!--<div class="row bar bar-footer" ng-show="sendingDetail">-->
+
+    <!--<div class="col text-center">-->
+        <!--<button class="button button-positive button-block" style="margin: -7%;padding: 0%;"-->
+                <!--ui-sref="exchangeMilk">-->
+            <!--换奶品-->
+        <!--</button>-->
+    <!--</div>-->
+
+    <!--<div class="col text-center">-->
+        <!--<button ui-sref="changeAddress" class="button button-positive button-block" style="margin: -7%;padding: 0%;"-->
+                <!--ng-click="changeAddress()">-->
+            <!--更换地址-->
+        <!--</button>-->
+    <!--</div>-->
+
+    <!--<div class="col text-center">-->
+        <!--<button class="button button-positive button-block" style="margin: -7%;padding: 0%;"-->
+                <!--ng-click="stopDistribution(sendingList)">-->
+            <!--暂停送奶-->
+        <!--</button>-->
+    <!--</div>-->
+
+    <!--<div class="col text-center">-->
+        <!--<button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -5px"-->
+                <!--ng-click="moreHandle()">-->
+            <!--更多操作-->
+        <!--</button>-->
+        <!--<button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -68px"-->
+                <!--ng-click="moreHandle()" ng-show="moreMenu">-->
+            <!--退订-->
+        <!--</button>-->
+        <!--<button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -68px"-->
+                <!--ui-sref="changeDailyDelivery" ng-show="moreMenu">-->
+            <!--更换日配-->
+        <!--</button>-->
+        <!--<button class="button button-positive button-block" style="margin: 0%;padding: 0%; margin-top: -68px"-->
+                <!--ui-sref="activeMilk" ng-show="moreMenu" ng-click="beginSend()">-->
+            <!--开始配送-->
+        <!--</button>-->
+    <!--</div>-->
+<!--</div>-->
